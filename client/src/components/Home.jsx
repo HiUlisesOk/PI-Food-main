@@ -11,7 +11,7 @@ import allRecipes from "./RecipeCard";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const Allrecipes = dispatch(GetRecipes);
+  const Allrecipes = dispatch(GetRecipes());
   console.log(allRecipes);
   return (
     <>

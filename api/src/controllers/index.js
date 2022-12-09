@@ -10,13 +10,17 @@ async function searchRecipesInApiAndDB(Recipe) {
   if (!Recipe) throw new Error("No hay recetas");
 
   // Guardamos los datos de la API en data
-  const data = await getApiInfo();
+
+  let data = await getApiInfo();
 
   // Guardamos los datos de la DB en dbdata
   const dbData = await Recipe.findAll();
 
   // Juntamos los datos de ambas y los guardamos en allData
-  const allData = [dbData, ...data];
+
+  data = [dbData];
+
+  const allData = data;
   return allData;
 }
 
@@ -73,15 +77,43 @@ async function searchByName(name) {
 //
 /// <=============== POST - CREAR RECETA CONTROLLER ===============>
 
-async function createRecipes(name, image, summary, healthScore, steps, dietId) {
+async function createRecipes(
+  name,
+  image,
+  summary,
+  healthScore,
+  steps,
+  dishTypes,
+  dietId,
+) {
   //Comprobamos que solo se puedan añadir dietas con los valores correctos
-  if (dietId < 1 || dietId > 11)
-    throw new Error("El id de la receta tiene un valor incorrecto");
+  const AllDiets = await getDiets();
+  for (const id of dietId) {
+    if (id < 1 || id > AllDiets.length)
+      throw new Error("El id de la receta tiene un valor incorrecto");
+  }
+
+  // comprobamos si hay recetas repetidas
+  for (let i = 0; i < dietId.length; i++) {
+    for (let j = i + 1; j < dietId.length; j++) {
+      // console.log("valor de i:", dietId[i]);
+      // console.log("valor de j:", dietId[j]);
+      if (dietId[i] === dietId[j]) throw new Error("Existen dietas repetidas");
+    }
+  }
 
   //Si falta algun dato devolvemos un error
-  if (!name || !image || !summary || !healthScore || !steps || !dietId)
+  if (
+    !name ||
+    !image ||
+    !summary ||
+    !healthScore ||
+    !steps ||
+    !dietId ||
+    !dishTypes
+  )
     throw new Error("Faltan datos para crear la receta");
-
+  // console.log(name, image, summary, healthScore, steps, dishTypes, dietId)
   //comprobamos que la tabla de dietas tenga información precargada
   //Si no existe info en la tabla la creamos
   const dietExist = getDiets();
@@ -92,32 +124,36 @@ async function createRecipes(name, image, summary, healthScore, steps, dietId) {
   const recipeExist = await searchByName(name);
   //Si existe devolvemos un error y no creamos la receta
   if (recipeExist) throw new Error("La receta ya existe");
-  const mynewRecipe = await Recipe.create({
-    name,
-    image,
-    summary,
-    healthScore,
-    steps,
+  const [mynewRecipe, created] = await Recipe.findOrCreate({
+    where: {
+      name: name,
+      image: image,
+      summary: summary,
+      healthScore: healthScore,
+      dishTypes: dishTypes,
+      steps: steps,
+    },
   });
 
-  mynewRecipe.addDiet([dietId]);
+  mynewRecipe.addDiet(dietId);
   return mynewRecipe;
 }
 /// <=============== diets controller ===============>
 async function getDiets() {
   //Creamos un array con todas las dietas posibles
   const AllDiets = [
-    "Gluten Free",
-    "Ketogenic",
-    "Vegetarian",
-    "Lacto-Vegetarian",
-    "Ovo-Vegetarian",
-    "Vegan",
-    "Pescetarian",
-    "Paleo",
-    "Primal",
-    "Low FODMAP",
-    "Whole30",
+    "gluten free",
+    "ketogenic",
+    "vegetarian",
+    "lacto ovo vegetarian",
+    "ovo-vegetarian",
+    "vegan",
+    "pescatarian",
+    "paleolithic",
+    "primal",
+    "low fodmap",
+    "whole 30",
+    "dairy free",
   ];
 
   //iteramos sobre cada valor del array
@@ -139,6 +175,7 @@ async function getDiets() {
   //Retornamos todas las dietas
   return allDiets;
 }
+
 module.exports = {
   searchRecipesInApiAndDB,
   getRecipeById,
