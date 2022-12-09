@@ -6,13 +6,15 @@ import {
   CardPanel,
 } from "./styles";
 const RecipeCard = (props) => {
+  console.log(props);
   return (
     <>
       <CardContainer>
-        <CardImage image={props.image}>
-          <CardName>{props.name}</CardName>
-          <CardDietType>{props.diet}</CardDietType>
-        </CardImage>
+        <CardImage image={props.image}> </CardImage>
+        <CardName>{props.name}</CardName>
+        <CardDietType>
+          <h2>{props.diet}</h2>
+        </CardDietType>
       </CardContainer>
     </>
   );

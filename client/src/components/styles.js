@@ -90,10 +90,16 @@ export const SearchBtn = styled.button`
 `;
 export const ContainerRecipes = styled.div``;
 export const SelectFilter = styled.select``;
-
+export const OptionFilter = styled.option``;
+export const LabelFilter = styled.label``;
 /// <=============== RECIPE CARD ===============>
 export const CardContainer = styled.div``;
-export const CardImage = styled.div``;
+export const CardImage = styled.div`
+  height: 180px;
+  width: 120px;
+  background-image: url(${(props) =>
+    props.image ? props.image : "https://via.placeholder.com/120x180"});
+`;
 export const CardName = styled.div``;
 export const CardDietType = styled.div``;
 export const CardPanel = styled.div``;
