@@ -71,7 +71,23 @@ export const ContainerPanel = styled.div`
 /// <=============== HOME ===============>
 export const BigContainer = styled.div``;
 export const SearchBar = styled.input``;
-export const SearchBtn = styled.button``;
+export const SearchBtn = styled.button`
+  background: linear-gradient(to right, #f55f33, #f55f33);
+  background-color: #f55f33;
+  color: #fff;
+  font-family: Verdana;
+  font-size: 19px;
+  font-weight: 800;
+  font-style: normal;
+  text-decoration: none;
+  padding: 12px 17px;
+  border: 0px solid #000;
+  border-radius: 10px;
+  display: inline-block;
+  box-shadow: 4px 2px 7px -2px #2d2d2d;
+  margin: auto;
+  cursor: pointer !important;
+`;
 export const ContainerRecipes = styled.div``;
 export const SelectFilter = styled.select``;
 
