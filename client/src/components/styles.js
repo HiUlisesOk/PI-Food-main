@@ -97,9 +97,11 @@ export const CardContainer = styled.div``;
 export const CardImage = styled.div`
   height: 180px;
   width: 120px;
-  background-image: url(${(props) =>
-    props.image ? props.image : "https://via.placeholder.com/120x180"});
+  background-image: url(${(props) => props.image});
+  margin: auto;
 `;
 export const CardName = styled.div``;
 export const CardDietType = styled.div``;
 export const CardPanel = styled.div``;
+
+// ? props.image : "https://via.placeholder.com/120x180"

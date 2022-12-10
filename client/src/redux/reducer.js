@@ -1,5 +1,7 @@
 const initialState = {
   AllRecipes: [],
+  searchByName: [],
+  error: "",
 };
 
 const Reducer = (state = initialState, { type, payload }) => {
@@ -10,8 +12,14 @@ const Reducer = (state = initialState, { type, payload }) => {
         getRecipes.push(recipe);
       }
       // console.log(payload);
-      return { ...state, AllRecipes: getRecipes };
+      return { ...state, AllRecipes: getRecipes, error: "" };
 
+    case "SEARCH-RECIPE-NAME":
+      state = { ...state, searchByName: [payload], error: "" };
+      return state;
+    case "ERROR-REQUEST":
+      state = { ...state, error: payload };
+      return state;
     default:
       return state;
   }

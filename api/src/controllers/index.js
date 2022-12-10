@@ -36,21 +36,14 @@ async function getRecipeById(id) {
   });
 
   //Si ninguna coincide, buscamos en la base de datos
-  if (!findRecipe) {
-    try {
-      findRecipe = await Recipe.findOne({ where: { id: id } });
-    } catch (error) {
-      //Si tampoco encontramos nada respondemos con un error
-      throw new Error("El id ingresado no existe");
-    }
-  }
+  if (!findRecipe) throw new Error("El id ingresado no existe");
 
   return findRecipe;
 }
 
 /// <=============== controller search by Name ===============>
 async function searchByName(name) {
-  //
+  if (!name) throw new Error("Debe ingresar un nombre");
   // Guardamos los datos de la API en data
   const data = await getApiInfo();
 
@@ -59,16 +52,10 @@ async function searchByName(name) {
 
   //buscamos en la Api una receta que tenga el name que recibimos por parametros
   let findRecipe = data.find((recipe) => recipe.name === name);
-
+  console.log(findRecipe);
   //Si ninguna coincide, buscamos en la base de datos
-  if (!findRecipe) {
-    try {
-      findRecipe = await Recipe.findOne({ where: { name: name } });
-    } catch (error) {
-      //Si tampoco encontramos nada respondemos con un error
-      throw new Error("El id ingresado no existe");
-    }
-  }
+  if (!findRecipe) throw new Error("El nombre ingresado no existe");
+
   return findRecipe;
 }
 //

@@ -1,34 +1,46 @@
 import {
   BigContainer,
-  SearchBar,
-  SearchBtn,
-  ContainerRecipes,
   SelectFilter,
   OptionFilter,
   LabelFilter,
 } from "./styles";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { GetRecipes } from "../redux/actions";
-import RecipeCard from "./RecipeCard";
+import RecipeCards from "./RecipeCards";
+import SearchBarComponent from "./SearchBar";
+import { useSelector, useDispatch } from "react-redux";
 
 const Home = () => {
-  const recipes = useSelector((state) => state.AllRecipes);
   const dispatch = useDispatch();
-  // const [mystate, setmyState] = useState(false);
+  const MyState = useSelector((state) => state);
+  const [recipes, setRecipes] = useState(MyState.AllRecipes);
+  const [order, setOrder] = useState("Ascendente");
+  const [filter, setFilter] = useState("");
+  const [errorSearch, setErrorSearch] = useState(MyState.error);
+  if (!MyState.AllRecipes[0]) dispatch(GetRecipes());
+  if (MyState.AllRecipes[0] && !recipes.length) setRecipes(MyState.AllRecipes);
+
+  console.log(order, filter);
+
   useEffect(() => {
-    dispatch(GetRecipes());
-  }, []);
-  // const clickHandler = () => {
-  //   mystate ? setmyState(false) : setmyState(true);
-  // };
-  console.log(recipes);
+    setErrorSearch(MyState.error);
+    if (MyState.searchByName) {
+      setRecipes(MyState.searchByName);
+    }
+  }, [MyState]);
   return (
     <>
       <BigContainer>
-        <SearchBar type="text"></SearchBar>
-        <SearchBtn>Buscar</SearchBtn>
-        <SelectFilter>
+        <br />
+        <SearchBarComponent />
+        <br />
+        <br />
+        <SelectFilter onChange={(e) => setOrder(e.target.value)}>
+          <OptionFilter>Ascendente</OptionFilter>
+          <OptionFilter>Descendente</OptionFilter>
+        </SelectFilter>
+
+        <SelectFilter onChange={(e) => setFilter(e.target.value)}>
           <OptionFilter>gluten free</OptionFilter>
           <OptionFilter>ketogenic</OptionFilter>
           <OptionFilter>vegetarian</OptionFilter>
@@ -42,23 +54,10 @@ const Home = () => {
           <OptionFilter>whole 30</OptionFilter>
           <OptionFilter>dairy free</OptionFilter>
         </SelectFilter>
-        <SelectFilter>
-          <OptionFilter>Ascendente</OptionFilter>
-          <OptionFilter>Descendente</OptionFilter>
-        </SelectFilter>
-        <ContainerRecipes>
-          {recipes.map((recipe) => {
-            return (
-              <RecipeCard
-                id={recipe.id}
-                key={recipe.id}
-                image={recipe.image}
-                name={recipe.name}
-                diets={recipe.diets.map((diet) => diet.name).join(",")}
-              />
-            );
-          })}
-        </ContainerRecipes>
+
+        <br></br>
+        {errorSearch}
+        <RecipeCards recipes={recipes} />
       </BigContainer>
     </>
   );
