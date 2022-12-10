@@ -54,7 +54,7 @@ const Home = () => {
                 key={recipe.id}
                 image={recipe.image}
                 name={recipe.name}
-                diet={recipe.diet}
+                diets={recipe.diets.map((diet) => diet.name).join(",")}
               />
             );
           })}

@@ -13,7 +13,7 @@ const RecipeCard = (props) => {
         <CardImage image={props.image}> </CardImage>
         <CardName>{props.name}</CardName>
         <CardDietType>
-          <h2>{props.diet}</h2>
+          <h2>{props.diets}</h2>
         </CardDietType>
       </CardContainer>
     </>

@@ -5,7 +5,7 @@ const { Diet, Recipe, RecipesDiet } = require("../db");
 const getApiInfo = require("../routes/searchApi");
 
 /// <=============== controller getAllRecipes ===============>
-async function searchRecipesInApiAndDB(Recipe) {
+async function searchRecipesInApiAndDB() {
   //Si la funcion no recibe nada, devuelve un error.
   if (!Recipe) throw new Error("No hay recetas");
 

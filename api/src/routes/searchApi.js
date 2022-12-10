@@ -6,7 +6,7 @@ const { YOUR_API_KEY, spoonacularURL } = process.env;
 
 ///////////////////////////////////////////////////////
 const getApiInfo = async () => {
-  const dbRecipes = await Recipe.findAll();
+  const dbRecipes = await Recipe.findAll({ include: Diet });
   if (dbRecipes.length) {
     console.log("vengo de la db");
     return dbRecipes;
