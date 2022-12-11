@@ -22,11 +22,23 @@ export const SearchRecipeByName = (name) => {
   };
 };
 
-export const SearchRecipeByid = (id) => {
+export const PaginationAction = (pagination) => {
   return async function (dispatch) {
     const axiosResponse = await axios.get(
-      `http://localhost:3001/recipes/${id}`,
+      `http://localhost:3001/getAllRecipes`,
     );
-    dispatch({ type: "SEARCH-RECIPE-ID", payload: axiosResponse.data });
+    dispatch({
+      type: "PAGINATION",
+      payload: { data: axiosResponse.data, pagination },
+    });
   };
 };
+
+// export const SearchRecipeByid = (id) => {
+//   return async function (dispatch) {
+//     const axiosResponse = await axios.get(
+//       `http://localhost:3001/recipes/${id}`,
+//     );
+//     dispatch({ type: "SEARCH-RECIPE-ID", payload: axiosResponse.data });
+//   };
+// };

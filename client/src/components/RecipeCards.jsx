@@ -2,12 +2,12 @@ import { ContainerRecipes } from "./styles";
 import RecipeCard from "./RecipeCard";
 import React from "react";
 const RecipeCards = (props) => {
-  const { recipes } = props;
+  const { AllRecipes } = props;
 
   return (
     <>
       <ContainerRecipes>
-        {recipes?.map((recipe) => {
+        {AllRecipes?.map((recipe) => {
           return (
             <RecipeCard
               id={recipe.id}

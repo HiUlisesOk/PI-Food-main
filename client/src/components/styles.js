@@ -95,8 +95,8 @@ export const LabelFilter = styled.label``;
 /// <=============== RECIPE CARD ===============>
 export const CardContainer = styled.div``;
 export const CardImage = styled.div`
-  height: 180px;
-  width: 120px;
+  height: 230px;
+  width: 280px;
   background-image: url(${(props) => props.image});
   margin: auto;
 `;
