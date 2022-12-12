@@ -14,7 +14,7 @@ const RecipeCards = (props) => {
               key={recipe.id}
               image={recipe.image}
               name={recipe.name}
-              diets={recipe.diets.map((diet) => diet.name).join(",")}
+              diets={recipe.diets?.map((diet) => diet.name).join(",")}
             />
           );
         })}

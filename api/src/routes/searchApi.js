@@ -29,7 +29,7 @@ const getApiInfo = async () => {
       name: recipe.title,
       image: recipe.image,
       dishTypes: recipe.dishTypes.join(", "),
-      diets: recipe.diets,
+      diets: recipe.diets.map((diet) => diet),
       summary: recipe.summary,
       healthScore: recipe.healthScore,
       steps:

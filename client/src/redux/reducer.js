@@ -1,6 +1,6 @@
 const initialState = {
   AllRecipes: [],
-  backup: [],
+  BackUpRecipes: [],
   error: "",
 };
 
@@ -12,7 +12,12 @@ const Reducer = (state = initialState, { type, payload }) => {
         getRecipes.push(recipe);
       }
 
-      return { ...state, AllRecipes: getRecipes, error: "" };
+      return {
+        ...state,
+        AllRecipes: getRecipes,
+        BackUpRecipes: getRecipes,
+        error: "",
+      };
 
     case "SEARCH-RECIPE-NAME":
       state = {
@@ -24,25 +29,95 @@ const Reducer = (state = initialState, { type, payload }) => {
     case "ERROR-REQUEST":
       state = { ...state, error: payload };
       return state;
+    ///// <=============== ORDER-AND-FILTER ===============> /////
     case "ORDER-AND-FILTER":
-      let backup = [...state.AllRecipes];
-
-      if (payload.orderType === "Ascendente" && payload.order === true) {
-        const copyState = [...state.AllRecipes];
-        const OrderOnly = copyState.sort((a, b) => {
-          if (a.name < b.name) {
-            return -1;
-          }
-          if (a.name > b.name) {
-            return 1;
-          }
-          return 0;
-        });
-
-        return { ...state, AllRecipes: OrderOnly, error: "" };
-      }
-      console.log(backup);
       console.log(state);
+      let orderState = [...state.AllRecipes];
+      //FILTER ===============>
+      if (payload.filter === true) {
+        const backupState = [...state.BackUpRecipes];
+
+        orderState = backupState.filter((recipe) => {
+          return recipe.diets.find((diet) => diet.name === payload.filterType);
+        });
+      }
+      if (payload.filterType === "no filter") {
+        orderState = [...state.BackUpRecipes];
+      }
+      if (payload.orderType === "no order") {
+        orderState = [...state.BackUpRecipes];
+        payload.order = false;
+      }
+
+      //ORDER ===============>
+      if (payload.order === true) {
+        if (payload.orderType === "Ascendente") {
+          orderState = orderState.sort((a, b) => {
+            if (a.name < b.name) {
+              return -1;
+            }
+            if (a.name > b.name) {
+              return 1;
+            }
+            return 0;
+          });
+
+          state = {
+            ...state,
+            AllRecipes: orderState,
+            error: "",
+          };
+        } else if (payload.orderType === "Descendente") {
+          orderState = orderState.sort((a, b) => {
+            if (a.name > b.name) {
+              return -1;
+            }
+            if (a.name < b.name) {
+              return 1;
+            }
+            return 0;
+          });
+
+          state = {
+            ...state,
+            AllRecipes: orderState,
+            error: "",
+          };
+        } else if (payload.orderType === "HealthScoreAscendente") {
+          orderState = orderState.sort((a, b) => {
+            if (a.healthScore < b.healthScore) {
+              return -1;
+            }
+            if (a.healthScore > b.healthScore) {
+              return 1;
+            }
+            return 0;
+          });
+
+          state = {
+            ...state,
+            AllRecipes: orderState,
+            error: "",
+          };
+        } else if (payload.orderType === "HealthScoreDescendente") {
+          orderState = orderState.sort((a, b) => {
+            if (a.healthScore > b.healthScore) {
+              return -1;
+            }
+            if (a.healthScore < b.healthScore) {
+              return 1;
+            }
+            return 0;
+          });
+
+          state = {
+            ...state,
+            AllRecipes: orderState,
+            error: "",
+          };
+        }
+      }
+      state = { ...state, AllRecipes: orderState, error: "" };
       return state;
 
     default:

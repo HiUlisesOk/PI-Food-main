@@ -52,17 +52,30 @@ const Home = () => {
 
   const [orderAndFilter, setOrderAndFilter] = useState({
     order: false,
-    orderType: "Ascendente",
+    orderType: "",
+    orderValue: "",
     filter: false,
     filterType: "",
+    filterValue: "",
   });
   const handlerOrderAndFilter = (e) => {
-    setOrderAndFilter({
-      ...orderAndFilter,
-      order: true,
-      orderType: e.target.value,
-    });
-    dispatch(OrderAndFilter(orderAndFilter));
+    if (e.target.name === "order") {
+      setOrderAndFilter({
+        ...orderAndFilter,
+        order: true,
+        orderType: e.target.value,
+      });
+      setPage(1);
+      dispatch(OrderAndFilter(orderAndFilter));
+    } else if (e.target.name === "filter") {
+      setOrderAndFilter({
+        ...orderAndFilter,
+        filter: true,
+        filterType: e.target.value,
+      });
+      setPage(1);
+      dispatch(OrderAndFilter(orderAndFilter));
+    }
   };
   //GET ALL RECIPES BACK
   const GetAllRecipesBack = () => {
@@ -75,6 +88,8 @@ const Home = () => {
   return (
     <>
       {orderAndFilter.orderType}
+      <br></br>
+      {orderAndFilter.filterType}
       <br></br>
       <BigContainer>
         <OrderAndFilterComponent

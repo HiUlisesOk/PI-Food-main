@@ -14,12 +14,22 @@ const OrderAndFilterComponent = ({ handlerOrderAndFilter, orderAndFilter }) => {
     <>
       <LabelFilter>Order:</LabelFilter>
       <SelectFilter name="order" onChange={handlerOrderAndFilter}>
-        <OptionFilter value="Ascendente">Ascendente</OptionFilter>
-        <OptionFilter value="Descendente">Descendente</OptionFilter>
+        <OptionFilter value="no order">No order </OptionFilter>
+        <OptionFilter value="Ascendente">Alfabetico - Ascendente </OptionFilter>
+        <OptionFilter value="Descendente">
+          Alfabetico - Descendente
+        </OptionFilter>
+        <OptionFilter value="HealthScoreAscendente">
+          Health Score - Ascendente
+        </OptionFilter>
+        <OptionFilter value="HealthScoreDescendente">
+          Health Score - Descendente
+        </OptionFilter>
       </SelectFilter>
 
       <LabelFilter>Filter:</LabelFilter>
       <SelectFilter name="filter" onChange={handlerOrderAndFilter}>
+        <OptionFilter value="no filter">No filter </OptionFilter>
         <OptionFilter value="gluten free">gluten free</OptionFilter>
         <OptionFilter value="ketogenic">ketogenic</OptionFilter>
         <OptionFilter value="vegetarian">vegetarian</OptionFilter>
