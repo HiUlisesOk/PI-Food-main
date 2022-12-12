@@ -1,50 +1,37 @@
-import { PaginationAction } from "../redux/actions";
-import { useSelector, useDispatch } from "react-redux";
-import React, { useEffect, useState } from "react";
-import RecipeCard from "./RecipeCard";
-const Pagination = () => {
-  const dispatch = useDispatch();
-  const AllRecipes = useSelector((state) => state.AllRecipes);
-  const MyPagination = useSelector((state) => state.pagination);
-  const [pagination, setpagination] = useState({ limit: 0, offset: 9 });
-  const [page, setPage] = useState(0);
+import React from "react";
+import {
+  ContainerPagination,
+  PaginationPanel,
+  ContainerButton,
+} from "./styles";
+const Pagination = ({
+  recipesPerPage,
+  AllRecipes,
+  pagination,
+  HandlePagination,
+}) => {
+  const pageNumbers = [];
 
-  function handleNextPage() {
-    if (pagination.limit < AllRecipes.length - 1) {
-      setpagination({
-        limit: pagination.limit + 9,
-        offset: pagination.offset + 9,
-      });
-      setPage(MyPagination);
-    }
+  for (let i = 1; i <= Math.ceil(AllRecipes.length / recipesPerPage); i++) {
+    pageNumbers.push(i);
   }
-  function handleBackPage() {
-    if (pagination.limit > 0) {
-      setpagination({
-        limit: pagination.limit - 9,
-        offset: pagination.offset - 9,
-      });
-      setPage(MyPagination);
-    }
-  }
-  useEffect(() => {
-    dispatch(PaginationAction(pagination));
-  }, [pagination]);
+
   return (
     <>
-      <button onClick={handleBackPage}>{"Back"}</button>
-      <button onClick={handleNextPage}>{"Next"}</button>
-      {MyPagination?.map((recipe) => {
-        return (
-          <RecipeCard
-            id={recipe.id}
-            key={recipe.id}
-            image={recipe.image}
-            name={recipe.name}
-            diets={recipe.diets.map((diet) => diet.name).join(",")}
-          />
-        );
-      })}
+      <ContainerPagination>
+        <button onClick={(e) => HandlePagination("B")}>{"Back"}</button>
+        {pageNumbers &&
+          pageNumbers.map((number) => {
+            return (
+              <PaginationPanel key={number}>
+                <ContainerButton onClick={() => pagination(number)}>
+                  {number}
+                </ContainerButton>
+              </PaginationPanel>
+            );
+          })}
+        <button onClick={(e) => HandlePagination("N")}>{"Next"}</button>
+      </ContainerPagination>
     </>
   );
 };

@@ -52,7 +52,7 @@ async function searchByName(name) {
 
   //buscamos en la Api una receta que tenga el name que recibimos por parametros
   let findRecipe = data.find((recipe) => recipe.name === name);
-  console.log(findRecipe);
+
   //Si ninguna coincide, buscamos en la base de datos
   if (!findRecipe) throw new Error("El nombre ingresado no existe");
 

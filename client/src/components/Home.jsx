@@ -1,59 +1,105 @@
-import {
-  BigContainer,
-  SelectFilter,
-  OptionFilter,
-  LabelFilter,
-} from "./styles";
+import { BigContainer } from "./styles";
 import React, { useEffect, useState } from "react";
-import { GetRecipes } from "../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  GetRecipes,
+  SearchRecipeByName,
+  OrderAndFilter,
+} from "../redux/actions";
 import RecipeCards from "./RecipeCards";
 import Pagination from "./Pagination";
 import SearchBarComponent from "./SearchBar";
-import { useSelector, useDispatch } from "react-redux";
+import OrderAndFilterComponent from "./OrderAndFilterComponent";
 
 const Home = () => {
   const dispatch = useDispatch();
   const AllRecipes = useSelector((state) => state.AllRecipes);
 
-  const [order, setOrder] = useState("");
-  const [filter, setFilter] = useState("");
+  //PAGINATION
+  const [page, setPage] = useState(1);
+  const [recipesPerPage, setRecipesPerPage] = useState(9);
+  const indexOfLastRecipe = page * recipesPerPage;
+  const indexOfFirsRecipe = indexOfLastRecipe - recipesPerPage;
+  let currentRecipes = AllRecipes.slice(indexOfFirsRecipe, indexOfLastRecipe);
+  const pagination = (pageNumber) => {
+    setPage(pageNumber);
+  };
+  const HandlePagination = (direction, pageNumber) => {
+    switch (direction) {
+      case "N":
+        if (page < Math.ceil(AllRecipes.length / recipesPerPage)) {
+          setPage(page + 1);
+        }
+        break;
+      case "B":
+        if (page > 1) {
+          setPage(page - 1);
+        }
+        break;
+      default:
+        break;
+    }
+  };
+  //SEARCH BY NAME
+  const [search, setSearch] = useState("");
+  const clickHandlerByName = (e) => {
+    e.preventDefault();
+    dispatch(SearchRecipeByName(search));
+    setPage(1);
+  };
+
+  //ORDER & FILTER
+
+  const [orderAndFilter, setOrderAndFilter] = useState({
+    order: false,
+    orderType: "Ascendente",
+    filter: false,
+    filterType: "",
+  });
+  const handlerOrderAndFilter = (e) => {
+    setOrderAndFilter({
+      ...orderAndFilter,
+      order: true,
+      orderType: e.target.value,
+    });
+    dispatch(OrderAndFilter(orderAndFilter));
+  };
+  //GET ALL RECIPES BACK
+  const GetAllRecipesBack = () => {
+    dispatch(GetRecipes());
+  };
 
   useEffect(() => {
     dispatch(GetRecipes());
   }, [dispatch]);
-
   return (
     <>
+      {orderAndFilter.orderType}
+      <br></br>
       <BigContainer>
-        <LabelFilter>Order:</LabelFilter>
-        <SelectFilter onChange={(e) => setOrder(e.target.value)}>
-          <OptionFilter value="Ascendente">Ascendente</OptionFilter>
-          <OptionFilter value="Descendente">Descendente</OptionFilter>
-        </SelectFilter>
-
-        <LabelFilter>Filter:</LabelFilter>
-        <SelectFilter onChange={(e) => setFilter(e.target.value)}>
-          <OptionFilter value="gluten free">gluten free</OptionFilter>
-          <OptionFilter value="ketogenic">ketogenic</OptionFilter>
-          <OptionFilter value="vegetarian">vegetarian</OptionFilter>
-          <OptionFilter value="lacto ovo vegetarian">
-            lacto ovo vegetarian
-          </OptionFilter>
-          <OptionFilter value="ovo-vegetarian">ovo-vegetarian</OptionFilter>
-          <OptionFilter value="vegan">vegan</OptionFilter>
-          <OptionFilter value="pescatarian">pescatarian</OptionFilter>
-          <OptionFilter value="paleolithic">paleolithic</OptionFilter>
-          <OptionFilter value="primal">primal</OptionFilter>
-          <OptionFilter value="low fodmap">low fodmap</OptionFilter>
-          <OptionFilter value="whole 30">whole 30</OptionFilter>
-          <OptionFilter value="dairy free">dairy free</OptionFilter>
-        </SelectFilter>
+        <OrderAndFilterComponent
+          handlerOrderAndFilter={handlerOrderAndFilter}
+          orderAndFilter={orderAndFilter}
+        />
         <br />
-        <SearchBarComponent />
+        <SearchBarComponent
+          clickHandlerByName={clickHandlerByName}
+          setSearch={setSearch}
+        />
         <br />
+        {AllRecipes.length <= 1 && (
+          <button onClick={(e) => GetAllRecipesBack(e)}>
+            Get All Recipes Back
+          </button>
+        )}
+        <Pagination
+          recipesPerPage={recipesPerPage}
+          AllRecipes={AllRecipes}
+          pagination={pagination}
+          HandlePagination={HandlePagination}
+        />
 
-        {/* <RecipeCards AllRecipes={AllRecipes} /> */}
-        <Pagination></Pagination>
+        <RecipeCards currentRecipes={currentRecipes} />
       </BigContainer>
     </>
   );

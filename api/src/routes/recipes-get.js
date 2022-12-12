@@ -32,7 +32,6 @@ recipesRoutes.get("/recipes/:id", async (req, res) => {
 recipesRoutes.get("/recipes", async (req, res) => {
   try {
     const { name } = req.query;
-    console.log(name);
     const recipe = await searchByName(name);
     res.status(200).json(recipe);
   } catch (error) {

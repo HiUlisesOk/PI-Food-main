@@ -103,5 +103,13 @@ export const CardImage = styled.div`
 export const CardName = styled.div``;
 export const CardDietType = styled.div``;
 export const CardPanel = styled.div``;
-
+/// <=============== RECIPE CARD ===============>
+export const ContainerPagination = styled.div`
+  display: flex;
+  margin: auto;
+  flex-direction: row;
+  justify-content: center;
+`;
+export const PaginationPanel = styled.div``;
+export const ContainerButton = styled.button``;
 // ? props.image : "https://via.placeholder.com/120x180"
