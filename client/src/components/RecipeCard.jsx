@@ -5,10 +5,14 @@ import {
   CardDietType,
   CardPanel,
 } from "./styles";
+import { Link } from "react-router-dom";
 const RecipeCard = (props) => {
   return (
     <>
       <CardContainer>
+        <CardPanel>
+          <Link to={`/details/${props.id}`}>DETAILS</Link>
+        </CardPanel>
         <CardImage image={props.image}> </CardImage>
         <CardName>
           <h3>{props.name}</h3>

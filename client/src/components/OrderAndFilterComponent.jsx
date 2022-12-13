@@ -6,7 +6,7 @@ import { OrderAndFilter, GetRecipes } from "../redux/actions";
 const OrderAndFilterComponent = ({ handlerOrderAndFilter, orderAndFilter }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("El estado cambió, ahora es: ", orderAndFilter);
+    // console.log("El estado cambió, ahora es: ", orderAndFilter);
     dispatch(OrderAndFilter(orderAndFilter));
   }, [orderAndFilter]);
 

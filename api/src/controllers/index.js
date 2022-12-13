@@ -13,8 +13,8 @@ async function searchRecipesInApiAndDB() {
 
   let data = await getApiInfo();
 
-  // Guardamos los datos de la DB en dbdata
-
+  // Sobreescribimos con los datos de la DB en data
+  data = await Recipe.findAll();
   // Juntamos los datos de ambas y los guardamos en allData
 
   const allData = data;
@@ -26,15 +26,17 @@ async function getRecipeById(id) {
   //Si no recibe un parametro id retorna un error
   if (!id) throw new Error("Debe ingresar un id");
 
-  //Guardamos en data la info de la api, si no recibimos nada devolvemos un error
-  const data = await getApiInfo();
+  //cargamos los datos de la api en la db
+  let data = await getApiInfo();
+  // asignamos todo lo de la base de datos a la variable data
+  data = await Recipe.findAll({ include: Diet });
   if (!data) throw new Error("Error en la API");
 
   //buscamos en la Api una receta que tenga el id que recibimos por parametros
   let findRecipe = data.find((recipe) => {
-    return recipe.id === Number(id);
+    return recipe.id === id;
   });
-
+  console.log(data[0].id);
   //Si ninguna coincide, buscamos en la base de datos
   if (!findRecipe) throw new Error("El id ingresado no existe");
 

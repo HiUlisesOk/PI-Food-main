@@ -23,7 +23,6 @@ export const SearchRecipeByName = (name) => {
 };
 export const OrderAndFilter = (orderAndFilter) => {
   return function (dispatch) {
-    console.log(orderAndFilter);
     dispatch({ type: "ORDER-AND-FILTER", payload: orderAndFilter });
   };
 };

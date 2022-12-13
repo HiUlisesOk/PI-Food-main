@@ -31,7 +31,6 @@ const Reducer = (state = initialState, { type, payload }) => {
       return state;
     ///// <=============== ORDER-AND-FILTER ===============> /////
     case "ORDER-AND-FILTER":
-      console.log(state);
       let orderState = [...state.AllRecipes];
       //FILTER ===============>
       if (payload.filter === true) {

@@ -112,4 +112,18 @@ export const ContainerPagination = styled.div`
 `;
 export const PaginationPanel = styled.div``;
 export const ContainerButton = styled.button``;
-// ? props.image : "https://via.placeholder.com/120x180"
+
+/// <=============== DETAILS ===============>
+export const DetailsName = styled.div``;
+export const DetailsDietType = styled.div``;
+export const DetailsImg = styled.div`
+  height: 230px;
+  width: 280px;
+  background-image: url(${(props) => props.img});
+  margin: auto;
+`;
+export const DetailsDishType = styled.div``;
+export const DetailsSummary = styled.div``;
+export const DetailsSteps = styled.div``;
+export const DetailsHealthScore = styled.div``;
+export const DetailsPanel = styled.div``;
