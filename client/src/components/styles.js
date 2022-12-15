@@ -127,3 +127,57 @@ export const DetailsSummary = styled.div``;
 export const DetailsSteps = styled.div``;
 export const DetailsHealthScore = styled.div``;
 export const DetailsPanel = styled.div``;
+
+/// <=============== RECIPE CREATION ===============>
+export const FormContainer = styled.div``;
+export const FormRecipe = styled.form``;
+export const InputName = styled.input``;
+export const InputDietType = styled.input``;
+export const InputDishType = styled.input``;
+export const InputImg = styled.input``;
+export const TextAreaSummary = styled.textarea``;
+export const TextAreaSteps = styled.textarea``;
+export const InputHealthScore = styled.input``;
+export const LabelPanel = styled.label``;
+export const BigPanelContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export const PanelDivider = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+export const OptionContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`;
+export const OptionDivider = styled.div``;
+export const SubmitButton = styled.button`
+  background: linear-gradient(to right, #f55f33, #f55f33);
+  background-color: #f55f33;
+  color: #fff;
+  font-family: Verdana;
+  font-size: 19px;
+  font-weight: 800;
+  font-style: normal;
+  text-decoration: none;
+  padding: 12px 17px;
+  border: 0px solid #000;
+  border-radius: 10px;
+  display: inline-block;
+  box-shadow: 4px 2px 7px -2px #2d2d2d;
+  margin: auto;
+  cursor: pointer !important;
+  transform: scale(1);
+  &:hover {
+    background: linear-gradient(to right, #f6795e, #f6795e);
+    background-color: #f6795e;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+`;

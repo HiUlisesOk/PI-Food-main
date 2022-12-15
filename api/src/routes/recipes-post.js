@@ -7,6 +7,7 @@ recipesPost.post("/createRecipe", async (req, res) => {
   try {
     const { name, image, summary, healthScore, steps, dishTypes, dietId } =
       req.body;
+    console.log(healthScore);
     const myRecipe = await createRecipes(
       name,
       image,

@@ -37,6 +37,7 @@ const Reducer = (state = initialState, { type, payload }) => {
         const backupState = [...state.BackUpRecipes];
 
         orderState = backupState.filter((recipe) => {
+          console.log(recipe);
           return recipe.diets.find((diet) => diet.name === payload.filterType);
         });
       }

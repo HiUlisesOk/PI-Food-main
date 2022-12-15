@@ -108,6 +108,7 @@ const getApiInfo = async () => {
   }
 
   console.log("vengo de la api");
+
   return mappedApi;
 };
 module.exports = getApiInfo;

@@ -14,7 +14,7 @@ async function searchRecipesInApiAndDB() {
   let data = await getApiInfo();
 
   // Sobreescribimos con los datos de la DB en data
-  data = await Recipe.findAll();
+  data = await Recipe.findAll({ include: Diet });
   // Juntamos los datos de ambas y los guardamos en allData
 
   const allData = data;
@@ -105,11 +105,16 @@ async function createRecipes(
   const dietExist = getDiets();
   if (!dietExist) getDiets();
 
-  //Llamamos a la función search by name
-  //para comprobar si la receta ya existe
-  const recipeExist = await searchByName(name);
-  //Si existe devolvemos un error y no creamos la receta
-  if (recipeExist) throw new Error("La receta ya existe");
+  try {
+    //Llamamos a la función search by name
+    //para comprobar si la receta ya existe
+    const recipeExist = await searchByName(name);
+    //Si existe devolvemos un error y no creamos la receta
+    if (recipeExist) throw new Error("La receta ya existe");
+  } catch (error) {}
+  //Si recibimos un string en vez de un numero, lo convertimos.
+  if (typeof healthScore === "string") healthScore = Number(healthScore);
+  dishTypes = dishTypes.join(", ");
   const [mynewRecipe, created] = await Recipe.findOrCreate({
     where: {
       name: name,
