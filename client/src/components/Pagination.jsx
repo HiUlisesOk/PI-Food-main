@@ -19,18 +19,25 @@ const Pagination = ({
   return (
     <>
       <ContainerPagination>
-        <button onClick={(e) => HandlePagination("B")}>{"Back"}</button>
+        <ContainerButton onClick={(e) => HandlePagination("B")}>
+          {"Back"}
+        </ContainerButton>
         {pageNumbers &&
           pageNumbers.map((number) => {
             return (
               <PaginationPanel key={number}>
-                <ContainerButton onClick={() => pagination(number)}>
+                <ContainerButton
+                  name={number}
+                  onClick={() => pagination(number)}
+                >
                   {number}
                 </ContainerButton>
               </PaginationPanel>
             );
           })}
-        <button onClick={(e) => HandlePagination("N")}>{"Next"}</button>
+        <ContainerButton onClick={(e) => HandlePagination("N")}>
+          {"Next"}
+        </ContainerButton>
       </ContainerPagination>
     </>
   );

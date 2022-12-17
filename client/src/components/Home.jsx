@@ -1,4 +1,4 @@
-import { BigContainer } from "./styles";
+import { BigContainer, HomePanel } from "./styles";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -24,7 +24,8 @@ const Home = () => {
   const pagination = (pageNumber) => {
     setPage(pageNumber);
   };
-  const HandlePagination = (direction, pageNumber) => {
+  const HandlePagination = (direction, e) => {
+    console.log(e);
     switch (direction) {
       case "N":
         if (page < Math.ceil(AllRecipes.length / recipesPerPage)) {
@@ -87,21 +88,16 @@ const Home = () => {
   }, [dispatch]);
   return (
     <>
-      {orderAndFilter.orderType}
-      <br></br>
-      {orderAndFilter.filterType}
-      <br></br>
       <BigContainer>
-        <OrderAndFilterComponent
-          handlerOrderAndFilter={handlerOrderAndFilter}
-          orderAndFilter={orderAndFilter}
-        />
-        <br />
         <SearchBarComponent
           clickHandlerByName={clickHandlerByName}
           setSearch={setSearch}
         />
-        <br />
+
+        <OrderAndFilterComponent
+          handlerOrderAndFilter={handlerOrderAndFilter}
+          orderAndFilter={orderAndFilter}
+        />
         {AllRecipes.length <= 1 && (
           <button onClick={(e) => GetAllRecipesBack(e)}>
             Get All Recipes Back
@@ -115,6 +111,12 @@ const Home = () => {
         />
 
         <RecipeCards currentRecipes={currentRecipes} />
+        <Pagination
+          recipesPerPage={recipesPerPage}
+          AllRecipes={AllRecipes}
+          pagination={pagination}
+          HandlePagination={HandlePagination}
+        />
       </BigContainer>
     </>
   );

@@ -10,16 +10,14 @@ const RecipeCard = (props) => {
   return (
     <>
       <CardContainer>
-        <CardPanel>
-          <Link to={`/details/${props.id}`}>DETAILS</Link>
-        </CardPanel>
         <CardImage image={props.image}> </CardImage>
         <CardName>
           <h3>{props.name}</h3>
         </CardName>
-        <CardDietType>
-          <h4>{props.diets}</h4>
-        </CardDietType>
+        <CardDietType>{props.diets.split(",").join(" - ")}</CardDietType>
+        <Link to={`/details/${props.id}`}>
+          <CardPanel>Details</CardPanel>
+        </Link>
       </CardContainer>
     </>
   );

@@ -1,4 +1,4 @@
-import { SearchBar, SearchBtn } from "./styles";
+import { SearchBar, SearchBtn, HomePanel, SearchError } from "./styles";
 import React, { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
@@ -14,13 +14,15 @@ const SearchBarComponent = ({ clickHandlerByName, setSearch }) => {
 
   return (
     <>
-      <SearchBar
-        type="search"
-        onChange={(e) => setSearch(e.target.value)}
-      ></SearchBar>
-      <SearchBtn onClick={(e) => clickHandlerByName(e)}>Buscar</SearchBtn>
-      <br></br> {errorSearch}
-      <br></br>
+      <HomePanel>
+        <SearchBar
+          placeholder="Nombre de la receta..."
+          type="search"
+          onChange={(e) => setSearch(e.target.value)}
+        ></SearchBar>
+        <SearchBtn onClick={(e) => clickHandlerByName(e)}>Buscar</SearchBtn>
+      </HomePanel>
+      <SearchError>{errorSearch}</SearchError>
     </>
   );
 };

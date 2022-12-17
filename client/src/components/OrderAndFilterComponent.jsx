@@ -14,16 +14,14 @@ const OrderAndFilterComponent = ({ handlerOrderAndFilter, orderAndFilter }) => {
     <>
       <LabelFilter>Order:</LabelFilter>
       <SelectFilter name="order" onChange={handlerOrderAndFilter}>
-        <OptionFilter value="no order">No order </OptionFilter>
-        <OptionFilter value="Ascendente">Alfabetico - Ascendente </OptionFilter>
-        <OptionFilter value="Descendente">
-          Alfabetico - Descendente
-        </OptionFilter>
+        <OptionFilter value="no order">No order</OptionFilter>
+        <OptionFilter value="Ascendente">A - Z</OptionFilter>
+        <OptionFilter value="Descendente">Z - A</OptionFilter>
         <OptionFilter value="HealthScoreAscendente">
-          Health Score - Ascendente
+          Health Score - 0 A 100
         </OptionFilter>
         <OptionFilter value="HealthScoreDescendente">
-          Health Score - Descendente
+          Health Score - 100 A 0
         </OptionFilter>
       </SelectFilter>
 

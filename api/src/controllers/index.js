@@ -14,7 +14,7 @@ async function searchRecipesInApiAndDB() {
   let data = await getApiInfo();
 
   // Sobreescribimos con los datos de la DB en data
-  data = await Recipe.findAll({ include: Diet });
+  // data = await Recipe.findAll({ include: Diet });
   // Juntamos los datos de ambas y los guardamos en allData
 
   const allData = data;

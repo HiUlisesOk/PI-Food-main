@@ -8,6 +8,7 @@ import {
   WelcomeButton,
   ActiveSpan,
   ContainerPanel,
+  BottomBar,
 } from "./styles";
 
 const Portal = (props) => {
@@ -18,10 +19,6 @@ const Portal = (props) => {
           <TitleWeb>
             <ActiveSpan>Yummy</ActiveSpan> Chef
           </TitleWeb>
-          <SubTitleWeb>
-            Esquivel Ulises PI Made with <ActiveSpan>♥</ActiveSpan> for{" "}
-            <ActiveSpan>HENRY</ActiveSpan>
-          </SubTitleWeb>
         </TopBar>
         <ImageBackground>
           <ContainerPanel>
@@ -30,6 +27,12 @@ const Portal = (props) => {
             </Link>
           </ContainerPanel>
         </ImageBackground>
+        <BottomBar>
+          <SubTitleWeb>
+            Esquivel Ulises PI Made with <ActiveSpan>♥</ActiveSpan> for{" "}
+            <ActiveSpan>HENRY</ActiveSpan>
+          </SubTitleWeb>
+        </BottomBar>
       </PortalContainer>
     </>
   );
