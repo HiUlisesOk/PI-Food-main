@@ -23,6 +23,7 @@ font-weight: 400;
 font-size:1rem;
 line-height: 1.75;
 `;
+
 /// <=============== PORTAL ===============>
 export const PortalContainer = styled.div`
   display: flex;
@@ -68,7 +69,7 @@ export const WelcomeButton = styled.button`
   background: linear-gradient(to right, ${PrimaryColor}, ${PrimaryColor});
   background-color: ${PrimaryColor};
   color: ${thirdColor};
-  font-family: Verdana;
+  font-family: ${Lato};
   font-size: 19px;
   font-weight: 800;
   font-style: normal;
@@ -137,7 +138,36 @@ export const LinkPanel = styled.div`
   min-width: 100px;
   height: 32px;
 `;
-export const ButtonNav = styled.button``;
+export const ButtonNav = styled.button`
+  background: linear-gradient(to right, ${PrimaryColor}, ${PrimaryColor});
+  background-color: ${PrimaryColor};
+  color: ${thirdColor};
+  font-family: ${Lato};
+  font-size: 19px;
+  font-weight: 800;
+  font-style: normal;
+  text-decoration: none;
+  padding: 12px 17px;
+  border: 0px solid #000;
+  border-radius: 10px;
+  display: inline-block;
+  box-shadow: 4px 2px 7px -2px #2d2d2d;
+  display: flex;
+  align-self: flex-start;
+  margin: auto;
+  margin-left: 10px;
+
+  cursor: pointer !important;
+  transform: scale(1);
+  &:hover {
+    background: linear-gradient(to right, #f6795e, #f6795e);
+    background-color: #f6795e;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+`;
+
 /// <=============== HOME ===============>
 export const BigContainer = styled.div``;
 export const SearchBar = styled.input`
@@ -145,7 +175,7 @@ export const SearchBar = styled.input`
   padding: 12px 17px;
   border: 0px;
   border-bottom: solid 2px ${PrimaryColor};
-  background-color: ${SecondaryColor};
+  background-color: ${SecondaryColor}10;
   color: ${PrimaryColor};
   border-radius: 10px 0px 0px 0px;
   &:focus-visible {
@@ -207,7 +237,7 @@ export const OptionFilter = styled.option`
   border: 0px solid #000;
   border-bottom: 3px solid ${SecondaryColor};
   &:hover {
-    background-color: ${SecondaryColor};
+    background-color: ${thirdColor};
     color: ${PrimaryColor};
   }
 `;
@@ -308,40 +338,204 @@ export const ContainerPagination = styled.div`
 `;
 export const PaginationPanel = styled.div``;
 export const ContainerButton = styled.button`
+  margin: 5px;
   background: ${thirdColor};
-  color: ${SecondaryColor};
   border: solid 1px ${SecondaryColor};
   padding: 10px;
   min-width: 45px;
   cursor: pointer;
+  background: ${(props) => (props.isActive ? PrimaryColor : thirdColor)};
+  color: ${(props) => (props.isActive ? thirdColor : SecondaryColor)};
+  border-color: ${(props) => (props.isActive ? PrimaryColor : SecondaryColor)};
 `;
 
 /// <=============== DETAILS ===============>
-export const DetailsName = styled.div``;
-export const DetailsDietType = styled.div``;
+export const DetailsName = styled.div`
+  ${PlayfairDisplay}
+  font-size:2.3em;
+`;
+export const DetailsHealthScore = styled.div`
+  ${Lato}
+  background: ${SecondaryColor};
+  color: ${thirdColor};
+  padding: 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  border-radius: 10px 0px 10px 0px;
+  margin: 5px;
+`;
 export const DetailsImg = styled.div`
-  height: 230px;
-  width: 280px;
   background-image: url(${(props) => props.img});
+  height: 230px;
+  width: 300px;
+  border-radius: 25px 0px 25px 0px;
+  border: 5px solid ${SecondaryColor};
+  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+`;
+export const DetailsDietType = styled.div`
+  ${Lato}
+  background: ${PrimaryColor};
+  color: ${thirdColor};
+  padding: 10px;
+  border-radius: 25px;
+  text-transform: uppercase;
+  font-size: 10px;
+  margin: 5px;
+`;
+export const DetailsDishType = styled.div`
+  ${Lato}
+  background: ${SecondaryColor};
+  color: ${thirdColor};
+  padding: 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  border-radius: 10px 0px 10px 0px;
+  margin: 5px;
+`;
+export const DetailsSummary = styled.div`
+  width: 80%;
+  white-space: pre-line;
+  text-align: left;
+  & a {
+    font-weight: bold;
+    color: ${PrimaryColor};
+    text-decoration: none;
+  }
+  & a:active {
+    color: ${SecondaryColor};
+    text-decoration: none;
+  }
+  & a:hover {
+    cursor: pointer !important;
+    color: ${SecondaryColor};
+    text-decoration: none;
+  }
+`;
+export const DetailsSteps = styled.div`
+  width: 80%;
+  white-space: pre-line;
+  text-align: left;
+`;
+export const DetailsPanel = styled.div`
+  display: flex;
+  padding: 10px;
+  flex-direction: ${(props) => props.direction};
+  align-items: ${(props) => props.align};
+  justify-content: center;
+`;
+export const DetailsDietPanel = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+/// <=============== RECIPE FORM CREATION ===============>
+
+export const FormContainer = styled.div`
+  background-color: ${SecondaryColor}10;
+  width: 70%;
+  padding: 12px 17px;
+  margin: auto;
+  border-top: 5px solid ${PrimaryColor};
+`;
+export const FormRecipe = styled.form`
+  width: 95%;
   margin: auto;
 `;
-export const DetailsDishType = styled.div``;
-export const DetailsSummary = styled.div``;
-export const DetailsSteps = styled.div``;
-export const DetailsHealthScore = styled.div``;
-export const DetailsPanel = styled.div``;
+export const TitlePanel = styled.div`
+  width: 100%;
+  color: ${SecondaryColor};
+  ${PlayfairDisplay}
+  padding:10px;
+  text-decoration: none;
+  text-transform: capitalize;
+  text-align: left;
+  border: 0px solid #000;
+  border-bottom: 0px solid ${SecondaryColor};
+  &:focus-visible {
+    outline-offset: 0px;
+    outline: -webkit-focus-ring-color auto 0px;
+  }
+`;
+export const InputName = styled.input`
+  width: 90%;
+  min-height: 25px;
+  padding: 12px 17px;
+  border: 0px;
 
-/// <=============== RECIPE CREATION ===============>
-export const FormContainer = styled.div``;
-export const FormRecipe = styled.form``;
-export const InputName = styled.input``;
-export const InputDietType = styled.input``;
-export const InputDishType = styled.input``;
-export const InputImg = styled.input``;
-export const TextAreaSummary = styled.textarea``;
-export const TextAreaSteps = styled.textarea``;
-export const InputHealthScore = styled.input``;
-export const LabelPanel = styled.label``;
+  background-color: ${thirdColor};
+  color: ${PrimaryColor};
+  border: solid 2px ${PrimaryColor};
+  border-radius: 10px;
+  &:focus-visible {
+    outline-offset: 0px;
+    outline: -webkit-focus-ring-color auto 0px;
+  }
+`;
+
+export const InputImg = styled.input`
+  width: 90%;
+  min-height: 25px;
+  padding: 12px 17px;
+  border: 0px;
+
+  background-color: ${thirdColor};
+  color: ${PrimaryColor};
+  border: solid 2px ${PrimaryColor};
+  border-radius: 10px;
+  &:focus-visible {
+    outline-offset: 0px;
+    outline: -webkit-focus-ring-color auto 0px;
+  }
+`;
+export const TextAreaSummary = styled.textarea`
+  width: 90%;
+  min-height: 25px;
+  padding: 12px 17px;
+  border: 0px;
+  background-color: ${thirdColor};
+  color: ${PrimaryColor};
+  border: solid 2px ${PrimaryColor};
+  border-radius: 10px;
+  &:focus-visible {
+    outline-offset: 0px;
+    outline: -webkit-focus-ring-color auto 0px;
+  }
+`;
+export const TextAreaSteps = styled.textarea`
+  width: 90%;
+  min-height: 25px;
+  padding: 12px 17px;
+  border: 0px;
+  background-color: ${thirdColor};
+  color: ${PrimaryColor};
+  border: solid 2px ${PrimaryColor};
+  border-radius: 10px;
+  &:focus-visible {
+    outline-offset: 0px;
+    outline: -webkit-focus-ring-color auto 0px;
+  }
+`;
+export const InputHealthScore = styled.input`
+  width: 20%;
+  min-height: 25px;
+  padding: 12px 17px;
+  border: 0px;
+  border: solid 2px ${PrimaryColor};
+  border-radius: 10px;
+  background-color: ${thirdColor};
+  color: ${PrimaryColor};
+  &:focus-visible {
+    outline-offset: 0px;
+    outline: -webkit-focus-ring-color auto 0px;
+  }
+`;
+
 export const BigPanelContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -349,20 +543,43 @@ export const BigPanelContainer = styled.div`
 export const PanelDivider = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  padding: 12px 17px;
 `;
 export const OptionContainer = styled.div`
+  padding: 12px 17px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 `;
-export const OptionDivider = styled.div``;
+export const InputDietType = styled.input`
+  display: none;
+`;
+export const InputDishType = styled.input`
+  display: none;
+`;
+export const LabelPanel = styled.label`
+  ${Lato}
+  background: ${PrimaryColor};
+  color: ${thirdColor};
+  padding: 5px 10px;
+  border-radius: 25px;
+  text-transform: uppercase;
+  font-size: 10px;
+  cursor: pointer;
+`;
+export const OptionDivider = styled.div`
+  margin: 5px;
+  & input[type="checkbox"]:checked + label {
+    background: ${SecondaryColor};
+  }
+`;
 export const SubmitButton = styled.button`
   background-color: ${PrimaryColor};
   color: ${thirdColor};
-  font-family: Verdana;
+  font-family: ${Lato};
   font-size: 19px;
   font-weight: 800;
   font-style: normal;
@@ -382,4 +599,13 @@ export const SubmitButton = styled.button`
   &:active {
     transform: scale(0.95);
   }
+`;
+
+export const ErrorPanel = styled.div`
+  ${Lato};
+  font-weight: bold;
+  min-height: 25px;
+  color: red;
+  display: block;
+  margin: auto;
 `;

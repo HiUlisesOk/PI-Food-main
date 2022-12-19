@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
 import {
   BigContainer,
   DetailsName,
@@ -11,6 +12,8 @@ import {
   DetailsSteps,
   DetailsHealthScore,
   DetailsPanel,
+  DetailsDietPanel,
+  ButtonNav,
 } from "./styles";
 const Details = (props) => {
   const { id } = useParams();
@@ -23,20 +26,36 @@ const Details = (props) => {
     });
   }, []);
 
+  const navigate = useNavigate();
   return (
     <>
+      <ButtonNav onClick={(e) => navigate("/home")}>BACK</ButtonNav>
       <BigContainer>
-        <DetailsName>{recipe.name}</DetailsName>
-        <DetailsHealthScore>
-          HealthScore: {recipe.healthScore}
-        </DetailsHealthScore>
-        <DetailsImg img={recipe.image}></DetailsImg>
-        <DetailsDietType>
-          {recipe.diets?.map((diet) => diet.name).join(", ")}
-        </DetailsDietType>
-        <DetailsDishType>{recipe.dishTypes}</DetailsDishType>
-        <DetailsSummary>{recipe.name}</DetailsSummary>
-        <DetailsSteps>{recipe.steps}</DetailsSteps>
+        <DetailsPanel align={"flex-start"} direction={"row"}>
+          <DetailsImg img={recipe.image}></DetailsImg>
+          <DetailsPanel align={"column"} direction={"column"}>
+            <DetailsName>{recipe.name}</DetailsName>
+            <DetailsPanel align={"stretch"} direction={"column"}>
+              <DetailsHealthScore>
+                HealthScore: {recipe.healthScore}
+              </DetailsHealthScore>
+              <DetailsDishType>Type: {recipe.dishTypes}</DetailsDishType>{" "}
+            </DetailsPanel>
+            <DetailsDietPanel>
+              {recipe.diets?.map((diet) => (
+                <DetailsDietType>{diet.name}</DetailsDietType>
+              ))}
+            </DetailsDietPanel>
+          </DetailsPanel>
+        </DetailsPanel>
+
+        <DetailsPanel align={"center"} direction={"column"}>
+          <DetailsSummary
+            dangerouslySetInnerHTML={{ __html: recipe.summary }}
+          ></DetailsSummary>
+          <DetailsName>Steps</DetailsName>
+          <DetailsSteps>{recipe.steps}</DetailsSteps>
+        </DetailsPanel>
       </BigContainer>
     </>
   );

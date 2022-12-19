@@ -10,6 +10,7 @@ import RecipeCards from "./RecipeCards";
 import Pagination from "./Pagination";
 import SearchBarComponent from "./SearchBar";
 import OrderAndFilterComponent from "./OrderAndFilterComponent";
+import { $CombinedState } from "redux";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -108,6 +109,7 @@ const Home = () => {
           AllRecipes={AllRecipes}
           pagination={pagination}
           HandlePagination={HandlePagination}
+          page={page}
         />
 
         <RecipeCards currentRecipes={currentRecipes} />
@@ -116,6 +118,7 @@ const Home = () => {
           AllRecipes={AllRecipes}
           pagination={pagination}
           HandlePagination={HandlePagination}
+          page={page}
         />
       </BigContainer>
     </>

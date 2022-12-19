@@ -9,6 +9,7 @@ const Pagination = ({
   AllRecipes,
   pagination,
   HandlePagination,
+  page,
 }) => {
   const pageNumbers = [];
 
@@ -27,8 +28,9 @@ const Pagination = ({
             return (
               <PaginationPanel key={number}>
                 <ContainerButton
+                  isActive={number === page}
                   name={number}
-                  onClick={() => pagination(number)}
+                  onClick={(e) => pagination(number, e)}
                 >
                   {number}
                 </ContainerButton>

@@ -38,9 +38,9 @@ const getApiInfo = async () => {
       steps:
         recipe.analyzedInstructions[0]?.steps
           .map((step) => {
-            return `${step.number} - ${step.step}`;
+            return `${step.number} - ${step.step} \n`;
           })
-          .join(" \n") || "Aún no tenemos los pasos para esta receta.",
+          .join(`\n`) || "Aún no tenemos los pasos para esta receta.",
     };
   });
 

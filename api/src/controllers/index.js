@@ -76,14 +76,12 @@ async function createRecipes(
   const AllDiets = await getDiets();
   for (const id of dietId) {
     if (id < 1 || id > AllDiets.length)
-      throw new Error("El id de la receta tiene un valor incorrecto");
+      throw new Error("El id de la dieta tiene un valor incorrecto");
   }
 
   // comprobamos si hay recetas repetidas
   for (let i = 0; i < dietId.length; i++) {
     for (let j = i + 1; j < dietId.length; j++) {
-      // console.log("valor de i:", dietId[i]);
-      // console.log("valor de j:", dietId[j]);
       if (dietId[i] === dietId[j]) throw new Error("Existen dietas repetidas");
     }
   }
@@ -105,13 +103,19 @@ async function createRecipes(
   const dietExist = getDiets();
   if (!dietExist) getDiets();
 
-  try {
-    //Llamamos a la función search by name
-    //para comprobar si la receta ya existe
-    const recipeExist = await searchByName(name);
-    //Si existe devolvemos un error y no creamos la receta
-    if (recipeExist) throw new Error("La receta ya existe");
-  } catch (error) {}
+  //Llamamos a la función getApiInfo()
+  //para comprobar si la receta ya existe
+  // Guardamos los datos de la API en data
+  const data = await getApiInfo();
+
+  //Si no recibe info de las recetas devuelve un error
+  if (!data) throw new Error("Error en la API");
+
+  //buscamos en la Api una receta que tenga el name que recibimos por parametros
+  let recipeExist = data.find((recipe) => recipe.name === name);
+  //Si existe devolvemos un error y no creamos la receta
+  if (recipeExist) throw new Error("La receta ya existe");
+
   //Si recibimos un string en vez de un numero, lo convertimos.
   if (typeof healthScore === "string") healthScore = Number(healthScore);
   dishTypes = dishTypes.join(", ");

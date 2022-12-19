@@ -17,7 +17,7 @@ recipesPost.post("/createRecipe", async (req, res) => {
       dishTypes,
       dietId,
     );
-    res.status(200).json(myRecipe);
+    res.status(200).send(myRecipe);
   } catch (error) {
     res.status(400).send(error.message);
   }
