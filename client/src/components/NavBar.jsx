@@ -5,19 +5,19 @@ import {
   TopBar,
   ActiveSpan,
   TitleWeb,
-  ButtonNav,
 } from "./styles";
 import { NavLink } from "react-router-dom";
 const NavBar = () => {
   return (
     <>
       {" "}
-      <TopBar>
-        <TitleWeb>
-          <ActiveSpan>Yummy</ActiveSpan> Chef
-        </TitleWeb>
-      </TopBar>
       <ContainerNav>
+        <TopBar>
+          <TitleWeb>
+            <ActiveSpan>Yummy</ActiveSpan> Chef
+          </TitleWeb>
+        </TopBar>
+
         <NavPanel>
           <NavLink to="/home">
             <LinkPanel>Home</LinkPanel>

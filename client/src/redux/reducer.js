@@ -20,35 +20,51 @@ const Reducer = (state = initialState, { type, payload }) => {
       };
 
     case "SEARCH-RECIPE-NAME":
-      state = {
+      console.log(payload);
+      console.log(state);
+      return {
         ...state,
-        AllRecipes: [payload],
+        AllRecipes: payload,
         error: "",
       };
-      return state;
+
     case "ERROR-REQUEST":
       state = { ...state, error: payload };
       return state;
     ///// <=============== ORDER-AND-FILTER ===============> /////
     case "ORDER-AND-FILTER":
       let orderState = [...state.AllRecipes];
-      //FILTER ===============>
-      if (payload.filter === true) {
-        const backupState = [...state.BackUpRecipes];
+      const backupState = [...state.BackUpRecipes];
 
-        orderState = backupState.filter((recipe) => {
-          console.log(recipe);
-          return recipe.diets.find((diet) => diet.name === payload.filterType);
-        });
-      }
       if (payload.filterType === "no filter") {
         orderState = [...state.BackUpRecipes];
+        state = {
+          ...state,
+          AllRecipes: orderState,
+          error: "",
+        };
+        payload.filter = false;
       }
       if (payload.orderType === "no order") {
         orderState = [...state.BackUpRecipes];
+        state = {
+          ...state,
+          AllRecipes: orderState,
+          error: "",
+        };
         payload.order = false;
       }
-
+      //FILTER ===============>
+      if (payload.filter === true) {
+        orderState = backupState.filter((recipe) => {
+          return recipe.diets.find((diet) => diet.name === payload.filterType);
+        });
+        state = {
+          ...state,
+          AllRecipes: orderState,
+          error: "",
+        };
+      }
       //ORDER ===============>
       if (payload.order === true) {
         if (payload.orderType === "Ascendente") {
@@ -118,6 +134,7 @@ const Reducer = (state = initialState, { type, payload }) => {
         }
       }
       state = { ...state, AllRecipes: orderState, error: "" };
+
       return state;
 
     default:

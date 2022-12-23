@@ -1,4 +1,4 @@
-import { BigContainer, HomePanel } from "./styles";
+import { BigContainer, GeneralButton } from "./styles";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -10,7 +10,6 @@ import RecipeCards from "./RecipeCards";
 import Pagination from "./Pagination";
 import SearchBarComponent from "./SearchBar";
 import OrderAndFilterComponent from "./OrderAndFilterComponent";
-import { $CombinedState } from "redux";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -19,6 +18,7 @@ const Home = () => {
   //PAGINATION
   const [page, setPage] = useState(1);
   const [recipesPerPage, setRecipesPerPage] = useState(9);
+
   const indexOfLastRecipe = page * recipesPerPage;
   const indexOfFirsRecipe = indexOfLastRecipe - recipesPerPage;
   let currentRecipes = AllRecipes.slice(indexOfFirsRecipe, indexOfLastRecipe);
@@ -85,8 +85,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(GetRecipes());
-  }, [dispatch]);
+    if (!AllRecipes.length) dispatch(GetRecipes());
+  }, []);
   return (
     <>
       <BigContainer>
@@ -99,27 +99,31 @@ const Home = () => {
           handlerOrderAndFilter={handlerOrderAndFilter}
           orderAndFilter={orderAndFilter}
         />
-        {AllRecipes.length <= 1 && (
-          <button onClick={(e) => GetAllRecipesBack(e)}>
+        {AllRecipes.length <= indexOfLastRecipe && (
+          <GeneralButton onClick={(e) => GetAllRecipesBack(e)}>
             Get All Recipes Back
-          </button>
+          </GeneralButton>
         )}
-        <Pagination
-          recipesPerPage={recipesPerPage}
-          AllRecipes={AllRecipes}
-          pagination={pagination}
-          HandlePagination={HandlePagination}
-          page={page}
-        />
+        {AllRecipes.length >= recipesPerPage && (
+          <Pagination
+            recipesPerPage={recipesPerPage}
+            AllRecipes={AllRecipes}
+            pagination={pagination}
+            HandlePagination={HandlePagination}
+            page={page}
+          />
+        )}
 
         <RecipeCards currentRecipes={currentRecipes} />
-        <Pagination
-          recipesPerPage={recipesPerPage}
-          AllRecipes={AllRecipes}
-          pagination={pagination}
-          HandlePagination={HandlePagination}
-          page={page}
-        />
+        {AllRecipes.length >= recipesPerPage && (
+          <Pagination
+            recipesPerPage={recipesPerPage}
+            AllRecipes={AllRecipes}
+            pagination={pagination}
+            HandlePagination={HandlePagination}
+            page={page}
+          />
+        )}
       </BigContainer>
     </>
   );

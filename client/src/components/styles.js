@@ -24,11 +24,21 @@ font-size:1rem;
 line-height: 1.75;
 `;
 
+export const WrapContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: space-around;
+`;
+export const WrapPanel = styled.div``;
+
 /// <=============== PORTAL ===============>
 export const PortalContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100%;
 `;
 export const TopBar = styled.div`
   display: flex;
@@ -44,9 +54,9 @@ export const BottomBar = styled.div`
 `;
 export const TitleWeb = styled.div`
   ${PlayfairDisplay}
-  width: 381px;
+  width: 181px;
   max-width: 500px;
-  font-size: 2.5em;
+  font-size: 1.5em;
   font-weight: bold;
   text-align: left;
 `;
@@ -103,10 +113,15 @@ export const ContainerPanel = styled.div`
 // <=============== NAVBAR ===============>
 export const ContainerNav = styled.div`
   min-height: 25px;
+  height: 100vh;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: flex-start;
   padding: 10px;
+
+  @media only screen and (${device.mobileL}) {
+    width: 0px;
+  }
 `;
 export const NavPanel = styled.div`
   min-width: 100px;
@@ -129,8 +144,8 @@ export const NavPanel = styled.div`
     text-decoration: none;
   }
   & a.active div {
-    color: ${PrimaryColor};
-    border-bottom: solid 2px ${PrimaryColor};
+    color: ${thirdColor};
+    background: ${PrimaryColor};
     text-decoration: none;
   }
 `;
@@ -150,12 +165,11 @@ export const ButtonNav = styled.button`
   padding: 12px 17px;
   border: 0px solid #000;
   border-radius: 10px;
-  display: inline-block;
-  box-shadow: 4px 2px 7px -2px #2d2d2d;
+
   display: flex;
-  align-self: flex-start;
+  align-self: flex-end;
   margin: auto;
-  margin-left: 10px;
+  margin-right: 15px;
 
   cursor: pointer !important;
   transform: scale(1);
@@ -167,9 +181,23 @@ export const ButtonNav = styled.button`
     transform: scale(0.95);
   }
 `;
-
+export const GeneralButton = styled(ButtonNav)`
+  margin-right: auto;
+  margin: 25px auto;
+`;
 /// <=============== HOME ===============>
-export const BigContainer = styled.div``;
+export const BigContainer = styled.div`
+  min-width: 1100px;
+  background-color: ${SecondaryColor}10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  @media only screen and (${device.laptop}) {
+    min-width: 500px;
+  }
+  @media only screen and (${device.mobileL}) {
+    min-width: 300px;
+  }
+`;
 export const SearchBar = styled.input`
   min-height: 59px;
   padding: 12px 17px;
@@ -249,7 +277,8 @@ export const ContainerRecipes = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
   align-content: space-between;
-  justify-content: space-evenly;
+
+  justify-content: center;
 
   @media only screen and (${device.laptop}) {
     grid-template-columns: auto auto;
@@ -261,15 +290,15 @@ export const ContainerRecipes = styled.div`
 
 /// <=============== RECIPE CARD ===============>
 export const CardContainer = styled.div`
+  background-color: ${thirdColor};
   display: flex;
   flex-direction: column;
   min-height: 250px;
-  min-width: 220px;
+  min-width: 200px;
   max-height: 350px;
-  max-width: 290px;
+  max-width: 280px;
   margin: 10px;
-  border-radius: 10px 0px 10px 0px;
-  border-bottom: solid 3px ${PrimaryColor};
+  border-radius: 10px 10px 10px 10px;
   border-top: solid 3px ${PrimaryColor};
   box-shadow: 15px 13px 13px -8px rgba(0, 0, 0, 0.1);
   & a {
@@ -289,10 +318,13 @@ export const CardContainer = styled.div`
 `;
 export const CardImage = styled.div`
   height: 130px;
-  width: 290px;
+  width: 280px;
   background-image: url(${(props) => props.image});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   margin: auto;
-  border-radius: 10px 0px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
   border-bottom: solid 5px ${PrimaryColor};
 `;
 export const CardName = styled.div`
@@ -314,9 +346,9 @@ export const CardPanel = styled.div`
   ${PlayfairDisplay}
   cursor: pointer !important;
   font-weight: bold;
-  height: 1.5em;
+  height: 2em;
   color: ${thirdColor};
-  border-radius: 0px 0px 10px 0px;
+  border-radius: 0px 0px 10px 10px;
   text-decoration: none;
 `;
 /// <=============== PAGINATION ===============>
@@ -366,6 +398,9 @@ export const DetailsHealthScore = styled.div`
 `;
 export const DetailsImg = styled.div`
   background-image: url(${(props) => props.img});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 230px;
   width: 300px;
   border-radius: 25px 0px 25px 0px;
@@ -424,6 +459,14 @@ export const DetailsPanel = styled.div`
   flex-direction: ${(props) => props.direction};
   align-items: ${(props) => props.align};
   justify-content: center;
+  @media only screen and (${device.laptop}) {
+    flex-direction: column;
+    align-items: center;
+  }
+  @media only screen and (${device.mobileL}) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 export const DetailsDietPanel = styled.div`
   display: flex;
@@ -437,11 +480,17 @@ export const DetailsDietPanel = styled.div`
 /// <=============== RECIPE FORM CREATION ===============>
 
 export const FormContainer = styled.div`
+  min-width: 1100px;
   background-color: ${SecondaryColor}10;
-  width: 70%;
+  width: 100%;
   padding: 12px 17px;
   margin: auto;
-  border-top: 5px solid ${PrimaryColor};
+  @media only screen and (${device.laptop}) {
+    min-width: 500px;
+  }
+  @media only screen and (${device.mobileL}) {
+    min-width: 300px;
+  }
 `;
 export const FormRecipe = styled.form`
   width: 95%;
@@ -470,7 +519,7 @@ export const InputName = styled.input`
 
   background-color: ${thirdColor};
   color: ${PrimaryColor};
-  border: solid 2px ${PrimaryColor};
+
   border-radius: 10px;
   &:focus-visible {
     outline-offset: 0px;
@@ -486,7 +535,7 @@ export const InputImg = styled.input`
 
   background-color: ${thirdColor};
   color: ${PrimaryColor};
-  border: solid 2px ${PrimaryColor};
+
   border-radius: 10px;
   &:focus-visible {
     outline-offset: 0px;
@@ -500,7 +549,7 @@ export const TextAreaSummary = styled.textarea`
   border: 0px;
   background-color: ${thirdColor};
   color: ${PrimaryColor};
-  border: solid 2px ${PrimaryColor};
+
   border-radius: 10px;
   &:focus-visible {
     outline-offset: 0px;
@@ -514,7 +563,7 @@ export const TextAreaSteps = styled.textarea`
   border: 0px;
   background-color: ${thirdColor};
   color: ${PrimaryColor};
-  border: solid 2px ${PrimaryColor};
+
   border-radius: 10px;
   &:focus-visible {
     outline-offset: 0px;
@@ -526,7 +575,7 @@ export const InputHealthScore = styled.input`
   min-height: 25px;
   padding: 12px 17px;
   border: 0px;
-  border: solid 2px ${PrimaryColor};
+
   border-radius: 10px;
   background-color: ${thirdColor};
   color: ${PrimaryColor};
@@ -588,7 +637,6 @@ export const SubmitButton = styled.button`
   border: 0px solid #000;
   border-radius: 10px;
   display: inline-block;
-  box-shadow: 4px 2px 7px -2px #2d2d2d;
   margin: auto;
   cursor: pointer !important;
   transform: scale(1);
@@ -607,5 +655,4 @@ export const ErrorPanel = styled.div`
   min-height: 25px;
   color: red;
   display: block;
-  margin: auto;
 `;

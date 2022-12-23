@@ -14,7 +14,7 @@ const RecipeCard = (props) => {
         <CardName>
           <h3>{props.name}</h3>
         </CardName>
-        <CardDietType>{props.diets.split(",").join(" - ")}</CardDietType>
+        <CardDietType>{props.diets?.split(",").join(" - ")}</CardDietType>
         <Link to={`/details/${props.id}`}>
           <CardPanel>Details</CardPanel>
         </Link>

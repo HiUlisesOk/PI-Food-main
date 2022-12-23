@@ -24,13 +24,13 @@ const Details = (props) => {
       const data = res.data;
       setRecipe(data);
     });
-  }, []);
+  }, [id]);
 
   const navigate = useNavigate();
   return (
     <>
-      <ButtonNav onClick={(e) => navigate("/home")}>BACK</ButtonNav>
       <BigContainer>
+        <ButtonNav onClick={(e) => navigate("/home")}>BACK</ButtonNav>
         <DetailsPanel align={"flex-start"} direction={"row"}>
           <DetailsImg img={recipe.image}></DetailsImg>
           <DetailsPanel align={"column"} direction={"column"}>

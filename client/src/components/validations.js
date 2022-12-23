@@ -1,8 +1,8 @@
 const validate = (inputs) => {
   const imgRegex =
-    /(?:(?:https?:\/\/))[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b(?:[-a-zA-Z0-9@:%_\+.~#?&\/=]*(\.jpg|\.png|\.jpeg|\.gif))/g;
+    /(?:(?:https?:\/\/))[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,4}\b(?:[-a-zA-Z0-9@:%_+.~#?&/=]*(\.jpg|\.png|\.jpeg|\.gif))/g;
   const imgTypeRegex = /[.](jpeg)|(jpg)|(gif)|(png)$/;
-  const specialCharactresTypeRegex = /[0-9@:%._\+~#=]/gi;
+  const specialCharactresTypeRegex = /[0-9@:%._+~#=]/gi;
   const errors = {};
 
   if (!inputs.name || specialCharactresTypeRegex.test(inputs.name)) {

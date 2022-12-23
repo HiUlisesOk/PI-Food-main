@@ -6,15 +6,21 @@ import NavBar from "./components/NavBar";
 import Details from "./components/Details";
 import RecipeCreation from "./components/RecipeCreation";
 import { useLocation } from "react-router-dom";
+import { WrapContainer, WrapPanel } from "./components/styles";
 function App() {
   const location = useLocation();
+
   return (
     <div className="App">
-      {location.pathname === "/" ? null : (
-        <>
-          <NavBar />
-        </>
-      )}
+      <WrapContainer>
+        <WrapPanel>
+          {location.pathname === "/" ? null : (
+            <>
+              <NavBar />
+            </>
+          )}
+        </WrapPanel>
+      </WrapContainer>
       <Routes>
         <Route exact path="/" element={<Portal />} />
         <Route exact path="/home" element={<Home />} />

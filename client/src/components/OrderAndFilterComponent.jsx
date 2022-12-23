@@ -1,14 +1,14 @@
 import { SelectFilter, OptionFilter, LabelFilter } from "./styles";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { OrderAndFilter, GetRecipes } from "../redux/actions";
+import { OrderAndFilter } from "../redux/actions";
 
 const OrderAndFilterComponent = ({ handlerOrderAndFilter, orderAndFilter }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     // console.log("El estado cambió, ahora es: ", orderAndFilter);
     dispatch(OrderAndFilter(orderAndFilter));
-  }, [orderAndFilter]);
+  }, [orderAndFilter, dispatch]);
 
   return (
     <>

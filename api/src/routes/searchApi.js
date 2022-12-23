@@ -12,17 +12,17 @@ const getApiInfo = async () => {
     console.log("vengo de la db sin usar la api");
     return dbRecipes;
   }
-  // const searchApi = await axios.get(
-  //   `${spoonacularURL}/recipes/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=100`,
-  //   {
-  //     headers: { Accept: "application/json", "Accept-Encoding": "identity" },
-  //     params: { trophies: true },
-  //   },
-  // );
-
   const searchApi = await axios.get(
-    `https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`,
+    `${spoonacularURL}/recipes/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=100`,
+    {
+      headers: { Accept: "application/json", "Accept-Encoding": "identity" },
+      params: { trophies: true },
+    },
   );
+
+  // const searchApi = await axios.get(
+  //   `https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`,
+  // );
 
   //Mapeamos toda la info que nos trae la api y nos quedamos solo
   // con lo que nos interesa

@@ -131,7 +131,7 @@ const RecipeCreation = () => {
               <TitlePanel>Diet Type</TitlePanel>
               <OptionContainer>
                 {diets &&
-                  diets.map((diet) => {
+                  diets.map((diet, index) => {
                     return (
                       <>
                         <OptionDivider key={diet.name}>
@@ -143,7 +143,9 @@ const RecipeCreation = () => {
                             onChange={(e) => handleChange(e)}
                             value={diet.id}
                           ></InputDietType>
-                          <LabelPanel for={diet.id}>{diet.name}</LabelPanel>
+                          <LabelPanel key={index} htmlFor={diet.id}>
+                            {diet.name}
+                          </LabelPanel>
                         </OptionDivider>
                       </>
                     );
@@ -154,18 +156,21 @@ const RecipeCreation = () => {
             <PanelDivider>
               <TitlePanel>Dish Type</TitlePanel>
               <OptionContainer>
-                {dishTypes.map((dish) => {
+                {dishTypes.map((dish, index) => {
                   return (
                     <>
-                      <OptionDivider>
+                      <OptionDivider key={index}>
                         <InputDishType
+                          key={index}
                           id={dish}
                           type="checkbox"
                           name="dishTypes"
                           onChange={(e) => handleChange(e)}
                           value={dish}
                         ></InputDishType>
-                        <LabelPanel for={dish}>{dish}</LabelPanel>
+                        <LabelPanel key={index} htmlFor={dish}>
+                          {dish}
+                        </LabelPanel>
                       </OptionDivider>
                     </>
                   );
