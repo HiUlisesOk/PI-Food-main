@@ -317,8 +317,11 @@ export const CardContainer = styled.div`
   }
 `;
 export const CardImage = styled.div`
-  height: 130px;
-  width: 280px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  min-height: 160px;
+  width: 100%;
   background-image: url(${(props) => props.image});
   background-position: center;
   background-repeat: no-repeat;
@@ -350,6 +353,23 @@ export const CardPanel = styled.div`
   color: ${thirdColor};
   border-radius: 0px 0px 10px 10px;
   text-decoration: none;
+`;
+/// <=============== FAVORITES ===============>
+export const FavButton = styled(ButtonNav)`
+  opacity: 0;
+  margin-right: auto;
+  margin: auto;
+  top: -100px;
+  align-self: flex-end;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  line-height: 0.75;
+  transition: all 0.3s ease-in-out;
+  ${CardContainer}:hover & {
+    top: 0px;
+    opacity: 1;
+  }
 `;
 /// <=============== PAGINATION ===============>
 export const ContainerPagination = styled.div`

@@ -19,7 +19,7 @@ const validate = (inputs) => {
   if (!inputs.dietId || !inputs.dietId.length)
     errors.dietId = "Debes seleccionar un tipo de dieta como minimo";
 
-  if (!inputs.dishTypes)
+  if (!inputs.dishTypes || !inputs.dishTypes.length)
     errors.dishTypes = "Debes seleccionar un tipo de plato como minimo";
 
   if (!inputs.summary)

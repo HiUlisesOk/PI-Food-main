@@ -2,6 +2,7 @@ const initialState = {
   AllRecipes: [],
   BackUpRecipes: [],
   error: "",
+  favorites: [],
 };
 
 const Reducer = (state = initialState, { type, payload }) => {
@@ -20,17 +21,13 @@ const Reducer = (state = initialState, { type, payload }) => {
       };
 
     case "SEARCH-RECIPE-NAME":
-      console.log(payload);
-      console.log(state);
-      return {
-        ...state,
-        AllRecipes: payload,
-        error: "",
-      };
+      state = { ...state, AllRecipes: payload, error: "" };
+      return state;
 
     case "ERROR-REQUEST":
       state = { ...state, error: payload };
       return state;
+
     ///// <=============== ORDER-AND-FILTER ===============> /////
     case "ORDER-AND-FILTER":
       let orderState = [...state.AllRecipes];
@@ -54,6 +51,7 @@ const Reducer = (state = initialState, { type, payload }) => {
         };
         payload.order = false;
       }
+
       //FILTER ===============>
       if (payload.filter === true) {
         orderState = backupState.filter((recipe) => {
@@ -65,6 +63,7 @@ const Reducer = (state = initialState, { type, payload }) => {
           error: "",
         };
       }
+
       //ORDER ===============>
       if (payload.order === true) {
         if (payload.orderType === "Ascendente") {
@@ -137,6 +136,19 @@ const Reducer = (state = initialState, { type, payload }) => {
 
       return state;
 
+    //FAVORITES ===============>
+    case "ADD-FAVORITE":
+      const allRecipes = [...state.BackUpRecipes];
+      const AddFav = allRecipes.filter((recipe) => recipe.id === payload);
+      state = { ...state, favorites: [...state.favorites, ...AddFav] };
+      return state;
+
+    case "DELETE-FAVORITE":
+      const deleteFav = state.favorites.filter(
+        (recipe) => recipe.id !== payload,
+      );
+      state = { ...state, favorites: deleteFav };
+      return state;
     default:
       return state;
   }

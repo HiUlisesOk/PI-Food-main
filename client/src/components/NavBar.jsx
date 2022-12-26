@@ -28,6 +28,11 @@ const NavBar = () => {
             <LinkPanel>Crear Receta </LinkPanel>
           </NavLink>
         </NavPanel>
+        <NavPanel>
+          <NavLink to="/favorites">
+            <LinkPanel>Favoritos </LinkPanel>
+          </NavLink>
+        </NavPanel>
       </ContainerNav>
     </>
   );

@@ -25,8 +25,7 @@ const Home = () => {
   const pagination = (pageNumber) => {
     setPage(pageNumber);
   };
-  const HandlePagination = (direction, e) => {
-    console.log(e);
+  const HandlePagination = (direction) => {
     switch (direction) {
       case "N":
         if (page < Math.ceil(AllRecipes.length / recipesPerPage)) {
@@ -81,6 +80,7 @@ const Home = () => {
   };
   //GET ALL RECIPES BACK
   const GetAllRecipesBack = () => {
+    setPage(1);
     dispatch(GetRecipes());
   };
 

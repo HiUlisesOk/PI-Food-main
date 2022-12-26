@@ -21,8 +21,21 @@ export const SearchRecipeByName = (name) => {
     }
   };
 };
+
 export const OrderAndFilter = (orderAndFilter) => {
   return function (dispatch) {
     dispatch({ type: "ORDER-AND-FILTER", payload: orderAndFilter });
+  };
+};
+
+export const addFavorites = (id) => {
+  return function (dispatch) {
+    dispatch({ type: "ADD-FAVORITE", payload: id });
+  };
+};
+
+export const deleteFav = (id) => {
+  return function (dispatch) {
+    dispatch({ type: "DELETE-FAVORITE", payload: id });
   };
 };

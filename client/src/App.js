@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import Details from "./components/Details";
 import RecipeCreation from "./components/RecipeCreation";
+import Favorites from "./components/Favorites";
 import { useLocation } from "react-router-dom";
 import { WrapContainer, WrapPanel } from "./components/styles";
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/details/:id" element={<Details />} />
         <Route exact path="/create-recipe" element={<RecipeCreation />} />
+        <Route exact path="/favorites" element={<Favorites />} />
       </Routes>
     </div>
   );

@@ -75,28 +75,38 @@ const RecipeCreation = () => {
       } else {
         var index = inputs[e.target.name].indexOf(e.target.value);
         if (index > -1) {
-          inputs[e.target.name].splice(index, 1);
+          setInputs({
+            ...inputs,
+            [e.target.name]: inputs[e.target.name].splice(index, 1),
+          });
         }
       }
     } else {
       setInputs({ ...inputs, [e.target.name]: e.target.value });
     }
+    console.log(inputs);
     setErrors(validate({ ...inputs, [e.target.name]: e.target.value }));
+    console.log(errors);
   };
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/createRecipe", {
-        ...inputs,
-      })
-      .then(function (response) {
-        console.log(response);
-        navigate(`/details/${response.data.id}`);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (Object.keys(errors).length) {
+      alert("Debes corregir los errores");
+    } else {
+      alert("Datos completos");
+      axios
+        .post("http://localhost:3001/createRecipe", {
+          ...inputs,
+        })
+        .then(function (response) {
+          console.log(response);
+          navigate(`/details/${response.data.id}`);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -134,16 +144,16 @@ const RecipeCreation = () => {
                   diets.map((diet, index) => {
                     return (
                       <>
-                        <OptionDivider key={diet.name}>
+                        <OptionDivider key={`${diet.name} Option`}>
                           <InputDietType
-                            key={diet.id}
+                            key={`${diet.id} Input`}
                             id={diet.id}
                             type="checkbox"
                             name="dietId"
                             onChange={(e) => handleChange(e)}
                             value={diet.id}
                           ></InputDietType>
-                          <LabelPanel key={index} htmlFor={diet.id}>
+                          <LabelPanel key={`${index} Label`} htmlFor={diet.id}>
                             {diet.name}
                           </LabelPanel>
                         </OptionDivider>
@@ -159,16 +169,16 @@ const RecipeCreation = () => {
                 {dishTypes.map((dish, index) => {
                   return (
                     <>
-                      <OptionDivider key={index}>
+                      <OptionDivider key={`${index} Option-Dish`}>
                         <InputDishType
-                          key={index}
+                          key={`${index} InputDish`}
                           id={dish}
                           type="checkbox"
                           name="dishTypes"
                           onChange={(e) => handleChange(e)}
                           value={dish}
                         ></InputDishType>
-                        <LabelPanel key={index} htmlFor={dish}>
+                        <LabelPanel key={`${index} LabelDish`} htmlFor={dish}>
                           {dish}
                         </LabelPanel>
                       </OptionDivider>
@@ -199,7 +209,7 @@ const RecipeCreation = () => {
                 name="image"
                 onChange={(e) => handleChange(e)}
                 placeholder="https://www.imagen.jpg"
-                type="url"
+                type="text"
               ></InputImg>
               <ErrorPanel>{errors.image && errors.image}</ErrorPanel>
             </PanelDivider>
