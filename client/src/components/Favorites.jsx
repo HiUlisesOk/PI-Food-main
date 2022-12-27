@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import RecipeCard from "./RecipeCard";
-import { BigContainer, ContainerRecipes } from "./styles";
+import { BigContainer, ContainerRecipes, Loader } from "./styles";
 const Favorites = () => {
   const Favorites = useSelector((state) => state.favorites);
 
@@ -23,7 +23,10 @@ const Favorites = () => {
               );
             })
           ) : (
-            <p>No hay favoritos agregados aún</p>
+            <p>
+              No hay favoritos agregados aún
+              <Loader />
+            </p>
           )}
         </ContainerRecipes>
       </BigContainer>

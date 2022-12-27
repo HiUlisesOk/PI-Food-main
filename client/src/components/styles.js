@@ -1,5 +1,6 @@
 import styled from "styled-components/macro";
 import picture from "../img/homeBG.jpg";
+import LoaderImg from "../img/Loader.png";
 const device = {
   mobileS: "max-width: 320px",
   mobileM: "max-width: 375px",
@@ -12,6 +13,13 @@ const device = {
 const PrimaryColor = "#f55f33";
 const SecondaryColor = "#1E1D1D";
 const thirdColor = "#FFF";
+
+// if (darkMode) {
+//   const PrimaryColor = "#1E1D1D";
+//   const SecondaryColor = "#f55f33";
+//   const thirdColor = "#FFF";
+// }
+
 const PlayfairDisplay = `
 font-family: 'Playfair Display';
 font-style: italic;
@@ -154,7 +162,6 @@ export const LinkPanel = styled.div`
   height: 32px;
 `;
 export const ButtonNav = styled.button`
-  background: linear-gradient(to right, ${PrimaryColor}, ${PrimaryColor});
   background-color: ${PrimaryColor};
   color: ${thirdColor};
   font-family: ${Lato};
@@ -173,10 +180,6 @@ export const ButtonNav = styled.button`
 
   cursor: pointer !important;
   transform: scale(1);
-  &:hover {
-    background: linear-gradient(to right, #f6795e, #f6795e);
-    background-color: #f6795e;
-  }
   &:active {
     transform: scale(0.95);
   }
@@ -296,7 +299,7 @@ export const CardContainer = styled.div`
   min-height: 250px;
   min-width: 200px;
   max-height: 350px;
-  max-width: 280px;
+  width: 280px;
   margin: 10px;
   border-radius: 10px 10px 10px 10px;
   border-top: solid 3px ${PrimaryColor};
@@ -318,7 +321,7 @@ export const CardContainer = styled.div`
 `;
 export const CardImage = styled.div`
   display: flex;
-  justify-content: flex-start;
+  align-items: flex-end;
   flex-direction: column;
   min-height: 160px;
   width: 100%;
@@ -356,6 +359,7 @@ export const CardPanel = styled.div`
 `;
 /// <=============== FAVORITES ===============>
 export const FavButton = styled(ButtonNav)`
+  background: ${(props) => (props.isActive ? PrimaryColor : SecondaryColor)};
   opacity: 0;
   margin-right: auto;
   margin: auto;
@@ -371,6 +375,10 @@ export const FavButton = styled(ButtonNav)`
     opacity: 1;
   }
 `;
+export const FavIcon = styled.div`
+  padding: 10px;
+`;
+
 /// <=============== PAGINATION ===============>
 export const ContainerPagination = styled.div`
   display: flex;
@@ -675,4 +683,37 @@ export const ErrorPanel = styled.div`
   min-height: 25px;
   color: red;
   display: block;
+`;
+
+export const Loader = styled.div`
+  background-image: url(${LoaderImg});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200px;
+  width: 200px;
+  margin: auto;
+  animation: LoaderAnimation 3s ease-in-out 0s infinite alternate-reverse none;
+
+  @keyframes LoaderAnimation {
+    0% {
+      transform: scale(1.25);
+    }
+    61% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.25);
+    }
+  }
+`;
+
+export const Logo = styled.div`
+  background-image: url(${LoaderImg});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 95px;
+  width: 150px;
+  margin: auto;
 `;

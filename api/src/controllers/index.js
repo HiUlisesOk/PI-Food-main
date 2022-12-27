@@ -6,19 +6,11 @@ const getApiInfo = require("../routes/searchApi");
 const specialCharactresTypeRegex = /[0-9@:%._+~#=]/gi;
 /// <=============== controller getAllRecipes ===============>
 async function searchRecipesInApiAndDB() {
+  // Guardamos los datos de la API en data
+  let data = await getApiInfo();
   //Si la funcion no recibe nada, devuelve un error.
   if (!Recipe) throw new Error("No hay recetas");
-
-  // Guardamos los datos de la API en data
-
-  let data = await getApiInfo();
-
-  // Sobreescribimos con los datos de la DB en data
-  // data = await Recipe.findAll({ include: Diet });
-  // Juntamos los datos de ambas y los guardamos en allData
-
-  const allData = data;
-  return allData;
+  return data;
 }
 
 /// <=============== controller ID ===============>
@@ -36,7 +28,7 @@ async function getRecipeById(id) {
   let findRecipe = data.find((recipe) => {
     return recipe.id === id;
   });
-  console.log(data[0].id);
+
   //Si ninguna coincide, buscamos en la base de datos
   if (!findRecipe) throw new Error("El id ingresado no existe");
 

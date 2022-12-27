@@ -5,6 +5,7 @@ import {
   TopBar,
   ActiveSpan,
   TitleWeb,
+  Logo,
 } from "./styles";
 import { NavLink } from "react-router-dom";
 const NavBar = () => {
@@ -14,10 +15,10 @@ const NavBar = () => {
       <ContainerNav>
         <TopBar>
           <TitleWeb>
+            <Logo />
             <ActiveSpan>Yummy</ActiveSpan> Chef
           </TitleWeb>
         </TopBar>
-
         <NavPanel>
           <NavLink to="/home">
             <LinkPanel>Home</LinkPanel>

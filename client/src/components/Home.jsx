@@ -1,4 +1,4 @@
-import { BigContainer, GeneralButton } from "./styles";
+import { BigContainer, GeneralButton, Loader } from "./styles";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -114,7 +114,15 @@ const Home = () => {
           />
         )}
 
-        <RecipeCards currentRecipes={currentRecipes} />
+        {AllRecipes.length ? (
+          <RecipeCards currentRecipes={currentRecipes} />
+        ) : (
+          <p>
+            Aún no tenemos recetas para mostrar aquí..
+            <br></br>
+            <Loader />
+          </p>
+        )}
         {AllRecipes.length >= recipesPerPage && (
           <Pagination
             recipesPerPage={recipesPerPage}

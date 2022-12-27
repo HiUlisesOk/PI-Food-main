@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
       },
       dishTypes: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       healthScore: {
         type: DataTypes.INTEGER,

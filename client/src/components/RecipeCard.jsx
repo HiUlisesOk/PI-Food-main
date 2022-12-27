@@ -5,6 +5,7 @@ import {
   CardDietType,
   CardPanel,
   FavButton,
+  FavIcon,
 } from "./styles";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -40,13 +41,19 @@ const RecipeCard = (props) => {
       <CardContainer>
         <CardImage image={props.image}>
           {isFav ? (
-            <FavButton onClick={handleFavorite}>
-              <p>ADDED TO FAVORITES</p>❤️
-            </FavButton>
+            <>
+              <FavButton isActive={true} onClick={handleFavorite}>
+                <p>ADDED TO FAVORITES</p>
+              </FavButton>
+              <FavIcon>⭐</FavIcon>
+            </>
           ) : (
-            <FavButton onClick={handleFavorite}>
-              <p>ADD TO FAVORITES</p>🤍
-            </FavButton>
+            <>
+              <FavButton isActive={false} onClick={handleFavorite}>
+                <p>ADD TO FAVORITES</p>
+              </FavButton>
+              <FavIcon> </FavIcon>
+            </>
           )}
         </CardImage>
         <CardName>
