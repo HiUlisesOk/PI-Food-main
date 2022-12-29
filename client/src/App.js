@@ -1,5 +1,5 @@
 import "./App.css";
-
+import { APP } from "./components/styles";
 import { Routes, Route } from "react-router-dom";
 import Portal from "./components/Portal";
 import Home from "./components/Home";
@@ -13,16 +13,17 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className="App">
-      <WrapContainer>
-        <WrapPanel>
-          {location.pathname === "/" ? null : (
-            <>
+    <APP className="App">
+      {location.pathname === "/" ? null : (
+        <>
+          <WrapContainer>
+            <WrapPanel>
               <NavBar />
-            </>
-          )}
-        </WrapPanel>
-      </WrapContainer>
+            </WrapPanel>
+          </WrapContainer>
+        </>
+      )}
+
       <Routes>
         <Route exact path="/" element={<Portal />} />
         <Route exact path="/home" element={<Home />} />
@@ -30,7 +31,7 @@ function App() {
         <Route exact path="/create-recipe" element={<RecipeCreation />} />
         <Route exact path="/favorites" element={<Favorites />} />
       </Routes>
-    </div>
+    </APP>
   );
 }
 

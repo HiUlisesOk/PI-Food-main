@@ -4,7 +4,7 @@ const validate = (inputs) => {
   const imgTypeRegex = /[.](jpeg)|(jpg)|(gif)|(png)$/;
   const specialCharactresTypeRegex = /[0-9@:%._+~#=]/gi;
   const errors = {};
-
+  console.log(inputs);
   if (!inputs.name || specialCharactresTypeRegex.test(inputs.name)) {
     errors.name = "Debes ingresar un nombre valido para la receta.";
   }
@@ -16,8 +16,9 @@ const validate = (inputs) => {
     errors.healthScore =
       "Debes ingresar un puntaje entre 0 y 100 para la receta.";
   }
-  if (!inputs.dietId || !inputs.dietId.length)
+  if (!inputs.dietId || !inputs.dietId.length) {
     errors.dietId = "Debes seleccionar un tipo de dieta como minimo";
+  }
 
   if (!inputs.dishTypes || !inputs.dishTypes.length)
     errors.dishTypes = "Debes seleccionar un tipo de plato como minimo";

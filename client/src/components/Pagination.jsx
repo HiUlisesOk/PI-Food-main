@@ -20,7 +20,10 @@ const Pagination = ({
   return (
     <>
       <ContainerPagination>
-        <ContainerButton onClick={(e) => HandlePagination("B")}>
+        <ContainerButton
+          isActive={page > 1}
+          onClick={(e) => HandlePagination("B")}
+        >
           {"Back"}
         </ContainerButton>
         {pageNumbers &&
@@ -37,7 +40,10 @@ const Pagination = ({
               </PaginationPanel>
             );
           })}
-        <ContainerButton onClick={(e) => HandlePagination("N")}>
+        <ContainerButton
+          isActive={page < Math.ceil(AllRecipes.length / recipesPerPage)}
+          onClick={(e) => HandlePagination("N")}
+        >
           {"Next"}
         </ContainerButton>
       </ContainerPagination>

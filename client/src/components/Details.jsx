@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 
 import {
@@ -14,6 +15,7 @@ import {
   DetailsPanel,
   DetailsDietPanel,
   ButtonNav,
+  FavIconDetail,
 } from "./styles";
 const Details = (props) => {
   const { id } = useParams();
@@ -25,28 +27,32 @@ const Details = (props) => {
       setRecipe(data);
     });
   }, [id]);
-
+  const Favorites = useSelector((state) => state.favorites);
   const navigate = useNavigate();
   return (
     <>
       <BigContainer>
         <ButtonNav onClick={(e) => navigate("/home")}>BACK</ButtonNav>
-        <DetailsPanel align={"flex-start"} direction={"row"}>
-          <DetailsImg img={recipe.image}></DetailsImg>
-          <DetailsPanel align={"column"} direction={"column"}>
-            <DetailsName>{recipe.name}</DetailsName>
-            <DetailsPanel align={"stretch"} direction={"column"}>
-              <DetailsHealthScore>
-                HealthScore: {recipe.healthScore}
-              </DetailsHealthScore>
-              <DetailsDishType>Type: {recipe.dishTypes}</DetailsDishType>{" "}
-            </DetailsPanel>
-            <DetailsDietPanel>
-              {recipe.diets?.map((diet) => (
-                <DetailsDietType>{diet.name}</DetailsDietType>
-              ))}
-            </DetailsDietPanel>
+        <DetailsPanel align={"flex-start"} direction={"row-reverse"}>
+          <DetailsName> {recipe.name}</DetailsName>{" "}
+          <DetailsImg img={recipe.image}>
+            {Favorites.some((fav) => fav.name === recipe.name) && (
+              <FavIconDetail>⭐</FavIconDetail>
+            )}
+          </DetailsImg>
+        </DetailsPanel>
+        <DetailsPanel align={"column"} direction={"column"}>
+          <DetailsPanel align={"stretch"} direction={"column"}>
+            <DetailsHealthScore>
+              HealthScore: {recipe.healthScore}
+            </DetailsHealthScore>
+            <DetailsDishType>Type: {recipe.dishTypes}</DetailsDishType>{" "}
           </DetailsPanel>
+          <DetailsDietPanel>
+            {recipe.diets?.map((diet) => (
+              <DetailsDietType>{diet.name}</DetailsDietType>
+            ))}
+          </DetailsDietPanel>
         </DetailsPanel>
 
         <DetailsPanel align={"center"} direction={"column"}>

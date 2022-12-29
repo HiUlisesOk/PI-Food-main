@@ -1,5 +1,5 @@
 import {
-  FormContainer,
+  BigContainer,
   FormRecipe,
   InputName,
   TextAreaSummary,
@@ -49,8 +49,8 @@ const RecipeCreation = () => {
   const [inputs, setInputs] = useState({
     name: "",
     healthScore: "",
-    dietId: "",
-    dishTypes: "",
+    dietId: [],
+    dishTypes: [],
     summary: "",
     steps: "",
     image: "",
@@ -67,26 +67,39 @@ const RecipeCreation = () => {
 
   const handleChange = (e) => {
     if (e.target.type === "checkbox") {
+      let copyInput = [...inputs[e.target.name]];
       if (e.target.checked) {
+        copyInput = [...copyInput, e.target.value];
         setInputs({
           ...inputs,
-          [e.target.name]: [...inputs[e.target.name], e.target.value],
+          [e.target.name]: copyInput,
         });
-      } else {
-        var index = inputs[e.target.name].indexOf(e.target.value);
-        if (index > -1) {
-          setInputs({
+        setErrors(
+          validate({
             ...inputs,
-            [e.target.name]: inputs[e.target.name].splice(index, 1),
-          });
-        }
+            [e.target.name]: copyInput,
+          }),
+        );
+      } else {
+        const newInput = copyInput.filter((element) => {
+          return element != e.target.value;
+        });
+
+        setInputs({
+          ...inputs,
+          [e.target.name]: newInput,
+        });
+        setErrors(
+          validate({
+            ...inputs,
+            [e.target.name]: newInput,
+          }),
+        );
       }
     } else {
       setInputs({ ...inputs, [e.target.name]: e.target.value });
+      setErrors(validate({ ...inputs, [e.target.name]: e.target.value }));
     }
-    console.log(inputs);
-    setErrors(validate({ ...inputs, [e.target.name]: e.target.value }));
-    console.log(errors);
   };
   const navigate = useNavigate();
   const handleSubmit = (e) => {
@@ -111,7 +124,7 @@ const RecipeCreation = () => {
 
   return (
     <>
-      <FormContainer>
+      <BigContainer>
         <FormRecipe onSubmit={(e) => handleSubmit(e)}>
           <BigPanelContainer>
             <PanelDivider>
@@ -216,7 +229,7 @@ const RecipeCreation = () => {
             <SubmitButton type="submit">SUBMIT</SubmitButton>
           </BigPanelContainer>
         </FormRecipe>
-      </FormContainer>
+      </BigContainer>
     </>
   );
 };

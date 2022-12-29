@@ -1,5 +1,6 @@
 import styled from "styled-components/macro";
 import picture from "../img/homeBG.jpg";
+import pattern from "../img/FoodBGPattern.png";
 import LoaderImg from "../img/Loader.png";
 const device = {
   mobileS: "max-width: 320px",
@@ -12,7 +13,7 @@ const device = {
 };
 const PrimaryColor = "#f55f33";
 const SecondaryColor = "#1E1D1D";
-const thirdColor = "#FFF";
+const thirdColor = "#FFFFFF";
 
 // if (darkMode) {
 //   const PrimaryColor = "#1E1D1D";
@@ -31,15 +32,22 @@ font-weight: 400;
 font-size:1rem;
 line-height: 1.75;
 `;
-
-export const WrapContainer = styled.div`
+export const APP = styled.div`
+  background-image: url(${pattern});
+  background-attachment: fixed;
   display: flex;
+  text-align: center;
+  margin: auto;
   flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  justify-content: space-around;
+  @media only screen and (${device.laptop}) {
+    flex-direction: column;
+  }
 `;
-export const WrapPanel = styled.div``;
+
+export const SubTitle = styled.div`
+  ${PlayfairDisplay}
+  padding:10px;
+`;
 
 /// <=============== PORTAL ===============>
 export const PortalContainer = styled.div`
@@ -53,6 +61,9 @@ export const TopBar = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
+  @media only screen and (${device.laptop}) {
+    display: none;
+  }
 `;
 export const BottomBar = styled.div`
   display: flex;
@@ -119,6 +130,28 @@ export const ContainerPanel = styled.div`
   }
 `;
 // <=============== NAVBAR ===============>
+export const WrapContainer = styled.div`
+  position: relative;
+  top: 0px;
+  min-width: 220px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: space-around;
+`;
+export const WrapPanel = styled.div`
+  width: auto;
+  z-index: 0;
+  background: ${thirdColor};
+  position: fixed;
+  @media only screen and (${device.laptop}) {
+    width: 100%;
+    background: ${thirdColor};
+    position: fixed;
+    z-index: 999;
+  }
+`;
 export const ContainerNav = styled.div`
   min-height: 25px;
   height: 100vh;
@@ -126,9 +159,16 @@ export const ContainerNav = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   padding: 10px;
-
+  @media only screen and (${device.laptop}) {
+    color: ${SecondaryColor};
+    height: auto;
+    flex-direction: row;
+    justify-content: center;
+  }
   @media only screen and (${device.mobileL}) {
-    width: 0px;
+    height: auto;
+    flex-direction: row;
+    justify-content: center;
   }
 `;
 export const NavPanel = styled.div`
@@ -136,7 +176,7 @@ export const NavPanel = styled.div`
   min-height: 25px;
   text-decoration: none;
   font-weight: 600;
-  margin: 5px;
+
   ${Lato}
   & a {
     text-transform: uppercase;
@@ -156,10 +196,22 @@ export const NavPanel = styled.div`
     background: ${PrimaryColor};
     text-decoration: none;
   }
+  @media only screen and (${device.laptop}) {
+    & a {
+      font-size: 0.5em;
+      color: ${SecondaryColor};
+    }
+  }
+  @media only screen and (${device.mobileL}) {
+    & a {
+      color: ${SecondaryColor};
+    }
+  }
 `;
 export const LinkPanel = styled.div`
   min-width: 100px;
   height: 32px;
+  padding: 7px;
 `;
 export const ButtonNav = styled.button`
   background-color: ${PrimaryColor};
@@ -185,19 +237,43 @@ export const ButtonNav = styled.button`
   }
 `;
 export const GeneralButton = styled(ButtonNav)`
-  margin-right: auto;
-  margin: 25px auto;
+  display: inline-block;
+  margin-left: 5px;
+  @media only screen and (${device.laptop}) {
+    margin-left: auto;
+    margin: 10px;
+    width: 90%;
+  }
+  @media only screen and (${device.mobileL}) {
+    margin-left: auto;
+    margin: 10px;
+    width: 90%;
+  }
 `;
+export const ResetButton = styled(GeneralButton)`
+  padding: 8px 27px;
+  opacity: 0.7;
+  background: red;
+  transition: all 0.1s;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
 /// <=============== HOME ===============>
 export const BigContainer = styled.div`
+  min-height: 100vh;
   min-width: 1100px;
-  background-color: ${SecondaryColor}10;
+  width: 100%;
+  background-color: ${thirdColor}90;
   padding-top: 20px;
   padding-bottom: 20px;
   @media only screen and (${device.laptop}) {
+    padding-top: 60px;
     min-width: 500px;
   }
   @media only screen and (${device.mobileL}) {
+    padding-top: 60px;
     min-width: 300px;
   }
 `;
@@ -206,7 +282,7 @@ export const SearchBar = styled.input`
   padding: 12px 17px;
   border: 0px;
   border-bottom: solid 2px ${PrimaryColor};
-  background-color: ${SecondaryColor}10;
+  background-color: ${SecondaryColor}20;
   color: ${PrimaryColor};
   border-radius: 10px 0px 0px 0px;
   &:focus-visible {
@@ -245,6 +321,9 @@ export const SearchError = styled.div`
   font-weight: bold;
   color: red;
 `;
+export const PanelDividerOF = styled.div`
+  display: inline-block;
+`;
 export const SelectFilter = styled.select`
   color: ${SecondaryColor};
   ${Lato}
@@ -280,8 +359,8 @@ export const ContainerRecipes = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
   align-content: space-between;
-
   justify-content: center;
+  align-items: stretch;
 
   @media only screen and (${device.laptop}) {
     grid-template-columns: auto auto;
@@ -296,11 +375,11 @@ export const CardContainer = styled.div`
   background-color: ${thirdColor};
   display: flex;
   flex-direction: column;
-  min-height: 250px;
+  justify-content: space-between;
   min-width: 200px;
-  max-height: 350px;
   width: 280px;
   margin: 10px;
+  height: 350px;
   border-radius: 10px 10px 10px 10px;
   border-top: solid 3px ${PrimaryColor};
   box-shadow: 15px 13px 13px -8px rgba(0, 0, 0, 0.1);
@@ -323,13 +402,12 @@ export const CardImage = styled.div`
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-  min-height: 160px;
+  height: 160px;
   width: 100%;
   background-image: url(${(props) => props.image});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  margin: auto;
   border-radius: 10px 10px 0px 0px;
   border-bottom: solid 5px ${PrimaryColor};
 `;
@@ -337,15 +415,16 @@ export const CardName = styled.div`
   ${PlayfairDisplay}
   line-height:1em;
   padding: 10px;
-  min-height: 3em;
+  min-height: 1em;
+  font-size: 1em;
 `;
 export const CardDietType = styled.div`
   ${Lato}
   font-style: italic;
   padding: 10px;
   line-height: 1rem;
-  min-height: 3em;
-  max-height: 3.5em;
+  min-height: 1em;
+  font-size: 1rem;
 `;
 export const CardPanel = styled.div`
   background: ${PrimaryColor};
@@ -377,8 +456,12 @@ export const FavButton = styled(ButtonNav)`
 `;
 export const FavIcon = styled.div`
   padding: 10px;
+  display: inline-block;
 `;
-
+export const FavIconDetail = styled(FavIcon)`
+  font-size: 1.5em;
+  margin-left: auto;
+`;
 /// <=============== PAGINATION ===============>
 export const ContainerPagination = styled.div`
   display: flex;
@@ -401,6 +484,7 @@ export const ContainerButton = styled.button`
   margin: 5px;
   background: ${thirdColor};
   border: solid 1px ${SecondaryColor};
+  border-radius: 10px;
   padding: 10px;
   min-width: 45px;
   cursor: pointer;
@@ -413,6 +497,7 @@ export const ContainerButton = styled.button`
 export const DetailsName = styled.div`
   ${PlayfairDisplay}
   font-size:2.3em;
+  padding: 10px;
 `;
 export const DetailsHealthScore = styled.div`
   ${Lato}
@@ -435,6 +520,7 @@ export const DetailsImg = styled.div`
   border: 5px solid ${SecondaryColor};
   overflow: hidden;
   display: flex;
+  padding: 10px;
   flex-direction: column-reverse;
 `;
 export const DetailsDietType = styled.div`
@@ -508,11 +594,6 @@ export const DetailsDietPanel = styled.div`
 /// <=============== RECIPE FORM CREATION ===============>
 
 export const FormContainer = styled.div`
-  min-width: 1100px;
-  background-color: ${SecondaryColor}10;
-  width: 100%;
-  padding: 12px 17px;
-  margin: auto;
   @media only screen and (${device.laptop}) {
     min-width: 500px;
   }
@@ -521,7 +602,10 @@ export const FormContainer = styled.div`
   }
 `;
 export const FormRecipe = styled.form`
-  width: 95%;
+  background-color: ${SecondaryColor}10;
+  padding: 12px 17px;
+  margin: auto;
+  width: 80%;
   margin: auto;
 `;
 export const TitlePanel = styled.div`
@@ -616,6 +700,14 @@ export const InputHealthScore = styled.input`
 export const BigPanelContainer = styled.div`
   display: flex;
   flex-direction: column;
+  @media only screen and (${device.laptop}) {
+    padding-top: 70px;
+    min-width: 500px;
+  }
+  @media only screen and (${device.mobileL}) {
+    padding-top: 70px;
+    min-width: 300px;
+  }
 `;
 export const PanelDivider = styled.div`
   display: flex;
@@ -693,6 +785,8 @@ export const Loader = styled.div`
   height: 200px;
   width: 200px;
   margin: auto;
+  margin-top: auto;
+
   animation: LoaderAnimation 3s ease-in-out 0s infinite alternate-reverse none;
 
   @keyframes LoaderAnimation {

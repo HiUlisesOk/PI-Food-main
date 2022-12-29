@@ -28,7 +28,6 @@ const RecipeCard = (props) => {
     }
   };
   useEffect(() => {
-    console.log(Favorites);
     Favorites?.forEach((fav) => {
       if (fav.id === props.id) {
         setIsFav(true);

@@ -1,4 +1,4 @@
-import { BigContainer, GeneralButton, Loader } from "./styles";
+import { BigContainer, ResetButton, Loader, SubTitle } from "./styles";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -53,13 +53,13 @@ const Home = () => {
 
   const [orderAndFilter, setOrderAndFilter] = useState({
     order: false,
-    orderType: "",
-    orderValue: "",
+    orderType: "no order",
+
     filter: false,
-    filterType: "",
-    filterValue: "",
+    filterType: "no filter",
   });
   const handlerOrderAndFilter = (e) => {
+    console.log(e.target.value);
     if (e.target.name === "order") {
       setOrderAndFilter({
         ...orderAndFilter,
@@ -67,7 +67,6 @@ const Home = () => {
         orderType: e.target.value,
       });
       setPage(1);
-      dispatch(OrderAndFilter(orderAndFilter));
     } else if (e.target.name === "filter") {
       setOrderAndFilter({
         ...orderAndFilter,
@@ -75,21 +74,28 @@ const Home = () => {
         filterType: e.target.value,
       });
       setPage(1);
-      dispatch(OrderAndFilter(orderAndFilter));
     }
   };
   //GET ALL RECIPES BACK
   const GetAllRecipesBack = () => {
+    setOrderAndFilter({
+      order: false,
+      orderType: "no order",
+
+      filter: false,
+      filterType: "no filter",
+    });
     setPage(1);
     dispatch(GetRecipes());
   };
 
   useEffect(() => {
-    if (!AllRecipes.length) dispatch(GetRecipes());
+    if (!AllRecipes.length) GetAllRecipesBack();
   }, []);
   return (
     <>
       <BigContainer>
+        <SubTitle>¡Aquí puedes buscar tus recetas!</SubTitle>
         <SearchBarComponent
           clickHandlerByName={clickHandlerByName}
           setSearch={setSearch}
@@ -99,11 +105,9 @@ const Home = () => {
           handlerOrderAndFilter={handlerOrderAndFilter}
           orderAndFilter={orderAndFilter}
         />
-        {AllRecipes.length <= indexOfLastRecipe && (
-          <GeneralButton onClick={(e) => GetAllRecipesBack(e)}>
-            Get All Recipes Back
-          </GeneralButton>
-        )}
+
+        <ResetButton onClick={(e) => GetAllRecipesBack(e)}>Reset</ResetButton>
+
         {AllRecipes.length >= recipesPerPage && (
           <Pagination
             recipesPerPage={recipesPerPage}
