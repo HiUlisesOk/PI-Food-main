@@ -11,7 +11,7 @@ import {
   BottomBar,
 } from "./styles";
 
-const Portal = (props) => {
+const Portal = () => {
   return (
     <>
       <PortalContainer>

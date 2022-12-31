@@ -57,6 +57,7 @@ export const PortalContainer = styled.div`
   width: 100%;
 `;
 export const TopBar = styled.div`
+  background: ${thirdColor};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -66,6 +67,7 @@ export const TopBar = styled.div`
   }
 `;
 export const BottomBar = styled.div`
+  background: ${thirdColor};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -267,13 +269,16 @@ export const BigContainer = styled.div`
   width: 100%;
   background-color: ${thirdColor}90;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
+
   @media only screen and (${device.laptop}) {
     padding-top: 60px;
+    padding-bottom: 180px;
     min-width: 500px;
   }
   @media only screen and (${device.mobileL}) {
     padding-top: 60px;
+    padding-bottom: 180px;
     min-width: 300px;
   }
 `;
@@ -498,6 +503,7 @@ export const DetailsName = styled.div`
   ${PlayfairDisplay}
   font-size:2.3em;
   padding: 10px;
+  width: 66%;
 `;
 export const DetailsHealthScore = styled.div`
   ${Lato}

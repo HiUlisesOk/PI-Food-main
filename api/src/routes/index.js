@@ -4,6 +4,7 @@ const router = Router();
 // Ejemplo: const authRouter = require('./auth.js');
 const getRecipesRouter = require("./recipes-get");
 const recipesPost = require("./recipes-post");
+const deleteRecipe = require("./recipes-delete");
 const dietGet = require("./diets");
 
 // Configurar los routers
@@ -11,6 +12,7 @@ const dietGet = require("./diets");
 
 router.use(getRecipesRouter);
 router.use(recipesPost);
+router.use(deleteRecipe);
 router.use(dietGet);
 
 module.exports = router;

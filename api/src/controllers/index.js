@@ -4,6 +4,7 @@
 const { Diet, Recipe, RecipesDiet } = require("../db");
 const getApiInfo = require("../routes/searchApi");
 const specialCharactresTypeRegex = /[0-9@:%._+~#=]/gi;
+const { Op } = require("sequelize");
 /// <=============== controller getAllRecipes ===============>
 async function searchRecipesInApiAndDB() {
   // Guardamos los datos de la API en data
@@ -132,6 +133,23 @@ async function createRecipes(
   mynewRecipe.addDiet(dietId);
   return mynewRecipe;
 }
+/// <=============== DELETE RECIPE controller ===============>
+async function deleteMyRecipe(id) {
+  const result = Recipe.findAll({
+    where: {
+      id: {
+        [Op.eq]: id,
+      },
+    },
+  });
+  await Recipe.destroy({
+    where: {
+      id: id,
+    },
+  });
+
+  return result;
+}
 /// <=============== diets controller ===============>
 async function getDiets() {
   //Creamos un array con todas las dietas posibles
@@ -176,4 +194,5 @@ module.exports = {
   searchByName,
   getDiets,
   createRecipes,
+  deleteMyRecipe,
 };

@@ -11,13 +11,14 @@ import { NavLink } from "react-router-dom";
 const NavBar = () => {
   return (
     <>
-      {" "}
       <ContainerNav>
         <TopBar>
-          <TitleWeb>
-            <Logo />
-            <ActiveSpan>Yummy</ActiveSpan> Chef
-          </TitleWeb>
+          <NavLink to="/">
+            <TitleWeb>
+              <Logo />
+              <ActiveSpan>Yummy</ActiveSpan> Chef
+            </TitleWeb>
+          </NavLink>
         </TopBar>
         <NavPanel>
           <NavLink to="/home">

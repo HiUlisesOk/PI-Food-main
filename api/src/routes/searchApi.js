@@ -8,7 +8,7 @@ const { YOUR_API_KEY, spoonacularURL } = process.env;
 const getApiInfo = async () => {
   //Buscamos en la base de datos, si hay contenido en ella significa que ya se cargaron los datos de la api
   let dbRecipes = await Recipe.findAll({ include: Diet });
-  if (dbRecipes.length >= 100) {
+  if (dbRecipes.length) {
     console.log("vengo de la db sin usar la api");
     return dbRecipes;
   }

@@ -82,7 +82,7 @@ const RecipeCreation = () => {
         );
       } else {
         const newInput = copyInput.filter((element) => {
-          return element != e.target.value;
+          return element !== e.target.value;
         });
 
         setInputs({
