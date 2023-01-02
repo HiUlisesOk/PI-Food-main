@@ -59,7 +59,6 @@ const Home = () => {
     filterType: "no filter",
   });
   const handlerOrderAndFilter = (e) => {
-    console.log(e.target.value);
     if (e.target.name === "order") {
       setOrderAndFilter({
         ...orderAndFilter,

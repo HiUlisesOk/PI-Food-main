@@ -4,7 +4,6 @@ const initialState = {
   error: "",
   favorites: [],
 };
-
 const Reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case "GET-ALL-RECIPES":
@@ -22,6 +21,7 @@ const Reducer = (state = initialState, { type, payload }) => {
 
     case "SEARCH-RECIPE-NAME":
       state = { ...state, AllRecipes: payload, error: "" };
+
       return state;
 
     case "ERROR-REQUEST":
