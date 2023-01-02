@@ -24,7 +24,7 @@ const Pagination = ({
           isActive={page > 1}
           onClick={(e) => HandlePagination("B")}
         >
-          {"Back"}
+          ⮜
         </ContainerButton>
         {pageNumbers &&
           pageNumbers.map((number) => {
@@ -44,7 +44,7 @@ const Pagination = ({
           isActive={page < Math.ceil(AllRecipes.length / recipesPerPage)}
           onClick={(e) => HandlePagination("N")}
         >
-          {"Next"}
+          ⮞
         </ContainerButton>
       </ContainerPagination>
     </>

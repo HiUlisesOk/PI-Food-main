@@ -557,6 +557,14 @@ export const DetailsImg = styled.div`
   display: flex;
   padding: 10px;
   flex-direction: column-reverse;
+  @media only screen and (${device.laptop}) {
+    height: 130px;
+    width: 200px;
+  }
+  @media only screen and (${device.mobileL}) {
+    height: 130px;
+    width: 200px;
+  }
 `;
 export const DetailsDietType = styled.div`
   ${Lato}
