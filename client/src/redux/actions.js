@@ -1,9 +1,7 @@
 import axios from "axios";
 export const GetRecipes = () => {
   return async function (dispatch) {
-    const axiosResponse = await axios.get(
-      `http://localhost:3001/getAllRecipes`,
-    );
+    const axiosResponse = await axios.get(`/getAllRecipes`);
     dispatch({ type: "GET-ALL-RECIPES", payload: axiosResponse.data });
   };
 };
@@ -11,9 +9,7 @@ export const GetRecipes = () => {
 export const SearchRecipeByName = (name) => {
   return async function (dispatch) {
     try {
-      const axiosResponse = await axios.get(
-        `http://localhost:3001/recipes?name=${name}`,
-      );
+      const axiosResponse = await axios.get(`/recipes?name=${name}`);
 
       dispatch({ type: "SEARCH-RECIPE-NAME", payload: axiosResponse.data });
     } catch (error) {

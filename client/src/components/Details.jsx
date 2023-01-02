@@ -17,6 +17,7 @@ import {
   ButtonNav,
   FavIconDetail,
   ResetButton,
+  GeneralButton,
 } from "./styles";
 const Details = (props) => {
   const Favorites = useSelector((state) => state.favorites);
@@ -31,15 +32,22 @@ const Details = (props) => {
     );
     if (result) {
       axios
-        .delete(`http://localhost:3001/delete/${id}`)
+        .delete(`/delete/${id}`)
         .then(() => dispatch(GetRecipes()))
         .then(() => navigate("/home"))
         .catch((err) => console.log(err));
     }
   }
 
+  function handleEdit() {
+    var result = window.confirm("¿Desea editar la receta?");
+    if (result) {
+      navigate(`/Edit/${id}`);
+    }
+  }
+
   useEffect(() => {
-    axios.get(`http://localhost:3001/recipes/${id}`).then((res) => {
+    axios.get(`/recipes/${id}`).then((res) => {
       const data = res.data;
       setRecipe(data);
     });
@@ -49,6 +57,10 @@ const Details = (props) => {
     <>
       <BigContainer>
         <ButtonNav onClick={(e) => navigate("/home")}>BACK</ButtonNav>
+        <DetailsPanel justifyContent={"flex-start"} direction={"row"}>
+          <ResetButton onClick={handleDelete}>DELETE RECIPE</ResetButton>
+          <GeneralButton onClick={handleEdit}>EDIT RECIPE</GeneralButton>
+        </DetailsPanel>
         <DetailsPanel align={"flex-start"} direction={"row-reverse"}>
           <DetailsName>
             {recipe.name}
@@ -72,7 +84,6 @@ const Details = (props) => {
             </DetailsHealthScore>
           </DetailsPanel>
         </DetailsPanel>
-
         <DetailsPanel align={"center"} direction={"column"}>
           <DetailsSummary
             dangerouslySetInnerHTML={{ __html: recipe.summary }}
@@ -80,7 +91,6 @@ const Details = (props) => {
           <DetailsName>Steps</DetailsName>
           <DetailsSteps>{recipe.steps}</DetailsSteps>
         </DetailsPanel>
-        <ResetButton onClick={handleDelete}>DELETE RECIPE</ResetButton>
       </BigContainer>
     </>
   );

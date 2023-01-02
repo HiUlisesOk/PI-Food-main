@@ -239,8 +239,14 @@ export const ButtonNav = styled.button`
   }
 `;
 export const GeneralButton = styled(ButtonNav)`
+  padding: 8px 27px;
   display: inline-block;
   margin-left: 5px;
+  opacity: 0.7;
+  transition: all 0.1s;
+  &:hover {
+    opacity: 1;
+  }
   @media only screen and (${device.laptop}) {
     margin-left: auto;
     margin: 10px;
@@ -254,11 +260,34 @@ export const GeneralButton = styled(ButtonNav)`
 `;
 export const ResetButton = styled(GeneralButton)`
   padding: 8px 27px;
-  opacity: 0.7;
   background: red;
+`;
+
+export const FormButton = styled.input`
+  color: ${PrimaryColor};
+  font-family: ${Lato};
+  font-size: 19px;
+  font-weight: 800;
+  font-style: normal;
+  text-decoration: none;
+  padding: 8px 27px;
+  border: 0px solid #000;
+  border-radius: 10px;
+  cursor: pointer !important;
+  display: inline-block;
+  margin-right: 5px;
+  opacity: 0.7;
   transition: all 0.1s;
   &:hover {
     opacity: 1;
+  }
+  @media only screen and (${device.laptop}) {
+    margin-left: auto;
+    margin: 10px;
+  }
+  @media only screen and (${device.mobileL}) {
+    margin-left: auto;
+    margin: 10px;
   }
 `;
 
@@ -445,7 +474,7 @@ export const CardPanel = styled.div`
 export const FavButton = styled(ButtonNav)`
   background: ${(props) => (props.isActive ? PrimaryColor : SecondaryColor)};
   opacity: 0;
-  margin-right: auto;
+  margin-left: auto;
   margin: auto;
   top: -100px;
   align-self: flex-end;
@@ -578,7 +607,7 @@ export const DetailsPanel = styled.div`
   padding: 10px;
   flex-direction: ${(props) => props.direction};
   align-items: ${(props) => props.align};
-  justify-content: center;
+  justify-content: ${(props) => props.justifyContent || "center"};
   @media only screen and (${device.laptop}) {
     flex-direction: column;
     align-items: center;

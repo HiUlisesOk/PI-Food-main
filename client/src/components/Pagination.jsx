@@ -33,7 +33,7 @@ const Pagination = ({
                 <ContainerButton
                   isActive={number === page}
                   name={number}
-                  onClick={(e) => pagination(number, e)}
+                  onClick={() => pagination(number)}
                 >
                   {number}
                 </ContainerButton>

@@ -24,7 +24,7 @@ import validate from "./validations";
 const RecipeCreation = () => {
   const [diets, setDiets] = useState("");
   useEffect(() => {
-    axios.get(`http://localhost:3001/diets`).then((res) => {
+    axios.get(`/diets`).then((res) => {
       const data = res.data;
       setDiets(data);
     });
@@ -109,7 +109,7 @@ const RecipeCreation = () => {
     } else {
       alert("Datos completos");
       axios
-        .post("http://localhost:3001/createRecipe", {
+        .post("/createRecipe", {
           ...inputs,
         })
         .then(function (response) {

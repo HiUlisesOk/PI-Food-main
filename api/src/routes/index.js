@@ -5,6 +5,7 @@ const router = Router();
 const getRecipesRouter = require("./recipes-get");
 const recipesPost = require("./recipes-post");
 const deleteRecipe = require("./recipes-delete");
+const putRecipe = require("./recipes-put");
 const dietGet = require("./diets");
 
 // Configurar los routers
@@ -13,6 +14,7 @@ const dietGet = require("./diets");
 router.use(getRecipesRouter);
 router.use(recipesPost);
 router.use(deleteRecipe);
+router.use(putRecipe);
 router.use(dietGet);
 
 module.exports = router;

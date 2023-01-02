@@ -134,7 +134,16 @@ async function createRecipes(
   return mynewRecipe;
 }
 /// <=============== DELETE RECIPE controller ===============>
-async function deleteMyRecipe(id) {
+async function deleteMyRecipe(
+  id,
+  name,
+  image,
+  summary,
+  healthScore,
+  steps,
+  dishTypes,
+  dietId,
+) {
   const result = Recipe.findAll({
     where: {
       id: {
@@ -149,6 +158,30 @@ async function deleteMyRecipe(id) {
   });
 
   return result;
+}
+
+/// <=============== EDIT RECIPE controller ===============>
+async function putMyRecipe(
+  id,
+  name,
+  image,
+  summary,
+  healthScore,
+  steps,
+  dishTypes,
+) {
+  const updateRecipe = await Recipe.update(
+    {
+      name: name,
+      image: image,
+      summary: summary,
+      healthScore: healthScore,
+      dishTypes: dishTypes.join(","),
+      steps: steps,
+    },
+    { where: { id: id } },
+  );
+  return updateRecipe;
 }
 /// <=============== diets controller ===============>
 async function getDiets() {
@@ -195,4 +228,5 @@ module.exports = {
   getDiets,
   createRecipes,
   deleteMyRecipe,
+  putMyRecipe,
 };

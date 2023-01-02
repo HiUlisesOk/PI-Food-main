@@ -17,7 +17,8 @@ module.exports = (sequelize) => {
       },
       image: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: "https://via.placeholder.com/500x500",
       },
       summary: {
         type: DataTypes.TEXT,
@@ -25,15 +26,18 @@ module.exports = (sequelize) => {
       },
       steps: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: "Aún no tenemos los pasos de esta receta",
       },
       dishTypes: {
         type: DataTypes.TEXT,
         allowNull: true,
+        defaultValue: "",
       },
       healthScore: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 50,
       },
     },
     {
