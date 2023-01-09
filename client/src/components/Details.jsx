@@ -115,7 +115,7 @@ const Details = (props) => {
           </>
         ) : (
           <p>
-            Aún no tenemos recetas para mostrar aquí..
+            <DetailsName>Tu receta se está cargando...</DetailsName>
             <br></br>
             <Loader />
           </p>
