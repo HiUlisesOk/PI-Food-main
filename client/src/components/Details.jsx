@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { GetRecipes } from "../redux/actions";
+
 import {
   BigContainer,
   DetailsName,
@@ -18,6 +19,7 @@ import {
   FavIconDetail,
   ResetButton,
   GeneralButton,
+  Loader,
 } from "./styles";
 const Details = (props) => {
   const Favorites = useSelector((state) => state.favorites);
@@ -56,41 +58,68 @@ const Details = (props) => {
   return (
     <>
       <BigContainer>
-        <ButtonNav onClick={(e) => navigate("/home")}>BACK</ButtonNav>
-        <DetailsPanel justifyContent={"flex-start"} direction={"row"}>
-          <ResetButton onClick={handleDelete}>DELETE RECIPE</ResetButton>
-          <GeneralButton onClick={handleEdit}>EDIT RECIPE</GeneralButton>
-        </DetailsPanel>
-        <DetailsPanel align={"flex-start"} direction={"row-reverse"}>
-          <DetailsName>
-            {recipe.name}
-            <DetailsDietPanel>
-              {recipe.diets?.map((diet) => (
-                <DetailsDietType>{diet.name}</DetailsDietType>
-              ))}
-            </DetailsDietPanel>
-          </DetailsName>
-          <DetailsImg img={recipe.image}>
-            {Favorites.some((fav) => fav.name === recipe.name) && (
-              <FavIconDetail>⭐</FavIconDetail>
-            )}
-          </DetailsImg>
-        </DetailsPanel>
-        <DetailsPanel align={"column"} direction={"column"}>
-          <DetailsPanel align={"stretch"} direction={"column"}>
-            <DetailsDishType>Dish Type: {recipe.dishTypes}</DetailsDishType>{" "}
-            <DetailsHealthScore>
-              HealthScore: {recipe.healthScore}
-            </DetailsHealthScore>
-          </DetailsPanel>
-        </DetailsPanel>
-        <DetailsPanel align={"center"} direction={"column"}>
-          <DetailsSummary
-            dangerouslySetInnerHTML={{ __html: recipe.summary }}
-          ></DetailsSummary>
-          <DetailsName>Steps</DetailsName>
-          <DetailsSteps>{recipe.steps}</DetailsSteps>
-        </DetailsPanel>
+        {" "}
+        {recipe ? (
+          <>
+            {" "}
+            <ButtonNav onClick={(e) => navigate("/home")}>BACK</ButtonNav>
+            <DetailsPanel
+              justifyContent={"flex-start"}
+              direction={"row"}
+            >
+              <ResetButton onClick={handleDelete}>DELETE RECIPE</ResetButton>
+              <GeneralButton onClick={handleEdit}>EDIT RECIPE</GeneralButton>
+            </DetailsPanel>
+            <DetailsPanel
+              align={"flex-start"}
+              direction={"row-reverse"}
+            >
+              <DetailsName>
+                {recipe.name}
+                <DetailsDietPanel>
+                  {recipe.diets?.map((diet) => (
+                    <DetailsDietType>{diet.name}</DetailsDietType>
+                  ))}
+                </DetailsDietPanel>
+              </DetailsName>
+              <DetailsImg img={recipe.image}>
+                {Favorites.some((fav) => fav.name === recipe.name) && (
+                  <FavIconDetail>⭐</FavIconDetail>
+                )}
+              </DetailsImg>
+            </DetailsPanel>
+            <DetailsPanel
+              align={"column"}
+              direction={"column"}
+            >
+              <DetailsPanel
+                align={"stretch"}
+                direction={"column"}
+              >
+                <DetailsDishType>Dish Type: {recipe.dishTypes}</DetailsDishType>{" "}
+                <DetailsHealthScore>
+                  HealthScore: {recipe.healthScore}
+                </DetailsHealthScore>
+              </DetailsPanel>
+            </DetailsPanel>
+            <DetailsPanel
+              align={"center"}
+              direction={"column"}
+            >
+              <DetailsSummary
+                dangerouslySetInnerHTML={{ __html: recipe.summary }}
+              ></DetailsSummary>
+              <DetailsName>Steps</DetailsName>
+              <DetailsSteps>{recipe.steps}</DetailsSteps>
+            </DetailsPanel>{" "}
+          </>
+        ) : (
+          <p>
+            Aún no tenemos recetas para mostrar aquí..
+            <br></br>
+            <Loader />
+          </p>
+        )}
       </BigContainer>
     </>
   );
