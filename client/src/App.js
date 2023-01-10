@@ -11,7 +11,7 @@ import RecipeEdit from "./components/Edit";
 import { useLocation } from "react-router-dom";
 import { WrapContainer, WrapPanel } from "./components/styles";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://pi-food-henry.onrender.com";
 
 function App() {
   const location = useLocation();

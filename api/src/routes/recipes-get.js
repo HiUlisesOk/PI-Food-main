@@ -8,7 +8,7 @@ const {
 } = require("../controllers/index.js");
 
 //recibimos todas las recetas de la API
-recipesRoutes.get("/getAllRecipes", async (req, res) => {
+recipesRoutes.get("/getallrecipes", async (req, res) => {
   try {
     const AllRecipes = await searchRecipesInApiAndDB(Recipe);
     res.status(200).send(AllRecipes);

@@ -41,14 +41,20 @@ const RecipeCard = (props) => {
         <CardImage image={props.image}>
           {isFav ? (
             <>
-              <FavButton isActive={true} onClick={handleFavorite}>
+              <FavButton
+                isActive={true}
+                onClick={handleFavorite}
+              >
                 <p>ADDED TO FAVORITES</p>
               </FavButton>
               <FavIcon>⭐</FavIcon>
             </>
           ) : (
             <>
-              <FavButton isActive={false} onClick={handleFavorite}>
+              <FavButton
+                isActive={false}
+                onClick={handleFavorite}
+              >
                 <p>ADD TO FAVORITES</p>
               </FavButton>
               <FavIcon> </FavIcon>
@@ -59,7 +65,7 @@ const RecipeCard = (props) => {
           <h3>{props.name}</h3>
         </CardName>
         <CardDietType>{props.diets?.split(",").join(" - ")}</CardDietType>
-        <Link to={`/details/${props.id}`}>
+        <Link to={`/details/${props.id}/#top`}>
           <CardPanel>Details</CardPanel>
         </Link>
       </CardContainer>
